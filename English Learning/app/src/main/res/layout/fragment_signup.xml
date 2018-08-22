@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+
+    >
+
+    <TextView
+        android:id="@+id/tv_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="CREATE ACCOUNT"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="24sp"
+        app:fontFamily="casual"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txt_user_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="100dp"
+        android:hint="Username"
+        android:textColorHint="#80ffffff"
+        android:background="@drawable/custome_edit_text"
+        android:drawableLeft="@drawable/ic_user"
+        android:textColor="@color/cardview_light_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create" />
+
+    <EditText
+        android:id="@+id/txt_mail_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="Email"
+        android:textColorHint="#80ffffff"
+        android:background="@drawable/custome_edit_text"
+        android:drawableLeft="@drawable/ic_mail"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/cardview_light_background"
+        app:layout_constraintEnd_toEndOf="@+id/txt_user_signup"
+        app:layout_constraintStart_toStartOf="@+id/txt_user_signup"
+        app:layout_constraintTop_toBottomOf="@+id/txt_user_signup" />
+
+    <EditText
+        android:id="@+id/txt_fullname_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="Fullname"
+        android:textColorHint="#80ffffff"
+        android:background="@drawable/custome_edit_text"
+        android:drawableLeft="@drawable/ic_fullname"
+        android:inputType="textPersonName"
+        android:textColor="@color/cardview_light_background"
+        app:layout_constraintEnd_toEndOf="@+id/txt_mail_signup"
+        app:layout_constraintStart_toStartOf="@+id/txt_mail_signup"
+        app:layout_constraintTop_toBottomOf="@+id/txt_mail_signup" />
+
+    <EditText
+        android:id="@+id/txt_password_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="Password"
+        android:textColorHint="#80ffffff"
+        android:background="@drawable/custome_edit_text"
+        android:drawableLeft="@drawable/ic_password"
+        android:inputType="textPassword"
+        android:textColor="@color/cardview_light_background"
+        app:layout_constraintEnd_toEndOf="@+id/txt_fullname_signup"
+        app:layout_constraintStart_toStartOf="@+id/txt_fullname_signup"
+        app:layout_constraintTop_toBottomOf="@+id/txt_fullname_signup" />
+
+    <Button
+        android:id="@+id/btn_create_account_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/custom_button"
+        android:text="Create Account"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toEndOf="@+id/txt_password_signup"
+        app:layout_constraintStart_toStartOf="@+id/txt_password_signup"
+        app:layout_constraintTop_toBottomOf="@+id/txt_password_signup" />
+
+    <Button
+        android:id="@+id/btn_term_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/custom_button_term"
+        android:text="Term &amp; Conditions"
+        android:textAllCaps="false"
+        android:textColor="#80ffffff"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_create_account_signup"
+        app:layout_constraintStart_toStartOf="@+id/btn_create_account_signup"
+        app:layout_constraintTop_toBottomOf="@+id/btn_create_account_signup" />
+
+
+</android.support.constraint.ConstraintLayout>
