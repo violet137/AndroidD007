@@ -1,6 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">EnglishLearning</string>
     <string name="facebook_app_id">2054289777914660</string>
     <string name="fb_login_protocol_scheme">fb2054289777914660</string>
     <string name="server_client_id">681498056848-9gtnakki83kfc2kgopqdrq5glnlveola.apps.googleusercontent.com</string>
+    <string-array name="arr_name_topic">
+        <item>Speed Review</item>
+        <item>Difficult Words</item>
+        <item>Pronunciation</item>
+        <item>Classic Review</item>
+        <item>Learn with Locals</item>
+        <item>Listening Skills</item>
+    </string-array>
+    <string-array name="arr_image_topic">
+        <item>@drawable/as_scb_speed</item>
+        <item>@drawable/as_scb_difficult</item>
+        <item>@drawable/as_scb_pronunciation</item>
+        <item>@drawable/as_scb_review</item>
+        <item>@drawable/as_scb_immersion</item>
+        <item>@drawable/as_scb_audio</item>
+    </string-array>
+    <string-array name="arr_conversation_topic">
+        <item>hello ahihi</item>
+    </string-array>
+
+    <string-array name="recording_text">
+        <item>Where do you live?</item>
+        <item>It is in California.</item>
+        <item>It is pretty big.</item>
+        <item>How big is Los Angeles?</item>
+    </string-array>
+
+    <integer-array name="recording_time">
+        <item>1000</item>
+        <item>9650</item>
+        <item>22260</item>
+        <item>31109</item>
+    </integer-array>
+
+
+    <string-array name="conversation">
+        <item>A: Where do you live?</item>
+        <item>B: I live in Pasadena.</item>
+        <item>A: Where is Pasadena?</item>
+        <item>B: It is in California.</item>
+        <item>A: Is it in northern California?</item>
+        <item>B: No. It is in southern California.</item>
+        <item>A: Is Pasadena a big city?</item>
+        <item>B: It is pretty big.</item>
+        <item>A: How big is "pretty big"?</item>
+        <item>B: It has about 140,000 people.</item>
+        <item>A: How big is Los Angeles?</item>
+        <item>B: It has about 3 million people</item>
+    </string-array>
+
+    <string-array name="vietsub">
+        <item>A: Bạn sống ở đâu?</item>
+        <item>B: Tôi sống ở Pasadena.</item>
+        <item>A: Pasadena thì ở đâu vậy?</item>
+        <item>B: Nó ở California đó.</item>
+        <item>A: Có phải ở phía bắc California không?</item>
+        <item>B: Không. Nó ở phía nam California.</item>
+        <item>A: Pasadena là một thành phố lớn phải không?</item>
+        <item>B: Nó khá lớn.</item>
+        <item>A: "Khá lớn" là lớn như thế nào?</item>
+        <item>B: Nó có khoảng 140,000 người.</item>
+        <item>A: Còn Los Angeles thì lớn như thê nào?</item>
+        <item>B: Nó có khoảng 3 triêu người.</item>
+    </string-array>
+
+    <integer-array name="block">
+        <item>0</item>
+        <item>3617</item>
+        <item>6560</item>
+        <item>9650</item>
+        <item>11389</item>
+        <item>15100</item>
+        <item>18926</item>
+        <item>22260</item>
+        <item>23702</item>
+        <item>27000</item>
+        <item>31109</item>
+        <item>35000</item>
+        <item>38674</item>
+    </integer-array>
+
+    <array name="number">
+        <item>@drawable/one</item>
+        <item>@drawable/two</item>
+        <item>@drawable/three</item>
+        <item>@drawable/four</item>
+        <item>@drawable/five</item>
+        <item>@drawable/six</item>
+        <item>@drawable/seven</item>
+        <item>@drawable/eight</item>
+        <item>@drawable/nine</item>
+        <item>@drawable/ten</item>
+    </array>
+
+    <array name="number_checked">
+    <item>@drawable/one_checked</item>
+    <item>@drawable/two_checked</item>
+    <item>@drawable/three_checked</item>
+    <item>@drawable/four_checked</item>
+    <item>@drawable/five_checked</item>
+    <item>@drawable/six_checked</item>
+    <item>@drawable/seven_checked</item>
+    <item>@drawable/eight_checked</item>
+    <item>@drawable/nine_checked</item>
+    <item>@drawable/ten_checked</item>
+    </array>
 </resources>

@@ -18,7 +18,7 @@
         android:background="@android:color/background_light"
         android:gravity="bottom|center"
         android:paddingBottom="15dp"
-        android:text="Pete: Hi! Are you Anna?"
+        android:text="Welcome to Listen Skill Class"
         android:textColor="@color/textUp"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -32,7 +32,6 @@
         android:layout_height="60dp"
         android:background="@android:color/background_light"
         android:gravity="top|center"
-        android:text="Anna: Yes! Hi there! Are you Pete?"
         android:textColor="@color/textDown"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/tvEnglishSaying"
@@ -42,11 +41,10 @@
     <TextView
         android:id="@+id/tvVietnamese"
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="60dp"
         android:layout_marginTop="5dp"
         android:background="@android:color/background_light"
         android:gravity="center"
-        android:text="Pete: Chào! Bạn là Anna?"
         android:textColor="@color/textUp"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -62,12 +60,11 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
-        android:background="@android:color/background_light"
         app:layout_constraintEnd_toStartOf="@+id/seekBar"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvVietnamese"
-        app:srcCompat="@android:drawable/checkbox_on_background" />
+        app:srcCompat="@drawable/play_button" />
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -90,7 +87,7 @@
         android:layout_marginRight="8dp"
         android:background="@android:color/background_light"
         android:gravity="center"
-        android:text="0.00/0.29"
+        android:text="0.00/0.00"
         app:layout_constraintBottom_toBottomOf="@+id/seekBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -107,28 +104,143 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:background="@android:color/background_light"
-        android:gravity="center"
+        android:gravity="top"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBar">
 
-        <ImageView
-            android:id="@+id/imgRecording"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seekBar"
-            app:srcCompat="@android:drawable/btn_star_big_on" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:foregroundGravity="center"
+            android:layout_marginBottom="10dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvSaying"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hãy nói: "
+                android:textSize="18dp"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/tvRecordingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/background_light"
+                android:gravity="center"
+                android:text="Pete: Chào! Bạn là Anna?"
+                android:textColor="@color/textUp"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/tvEnglishPrepare"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/tvEnglishPrepare"
+                app:layout_constraintTop_toBottomOf="@+id/tvEnglishPrepare" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvNgheLai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Nghe lại"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/imgLissen"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/refresh" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvRecord"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Nhẫn giữ để nói"
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/imgRecording"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/radio" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvNgheMau"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Nghe đoạn mẫu"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/imgPlaySample"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/telemarketer" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

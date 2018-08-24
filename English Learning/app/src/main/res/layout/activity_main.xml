@@ -73,6 +73,7 @@
                     android:background="@drawable/inp_rou"
                     android:gravity="center"
                     android:hint="password"
+                    android:inputType="textPassword"
                     android:padding="8dp"
                     android:textColorHint="#626262" />
 

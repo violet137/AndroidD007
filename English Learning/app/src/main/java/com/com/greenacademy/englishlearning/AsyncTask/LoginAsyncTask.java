@@ -87,6 +87,6 @@ public class LoginAsyncTask extends AsyncTask<String, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
-        supporter.showToast(aBoolean);
+        supporter.connectServer(aBoolean);
     }
 }

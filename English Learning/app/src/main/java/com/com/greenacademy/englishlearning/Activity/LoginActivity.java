@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     SignInButton signInButton;
 
     EditText txtUserName, txtPassword;
-    Button btnGo,btnCreate;
+    Button btnGo, btnCreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         txtUserName = findViewById(R.id.txt_User);
         txtPassword = findViewById(R.id.txt_Password);
         btnGo = findViewById(R.id.btn_Go);
-        btnCreate  = findViewById(R.id.btn_Creat);
+        btnCreate = findViewById(R.id.btn_Creat);
 
         btnGo.setOnClickListener(this);
         btnCreate.setOnClickListener(this);
@@ -168,6 +168,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
+            Intent i2 = new Intent(this, MainActivity.class);
+            startActivity(i2);
         }
     }
 
@@ -177,10 +179,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             // Signed in successfully, show authenticated UI.
 
+
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w("ssad", "signInResult:failed code=" + e.getStatusCode());
+            Log.w("error", "signInResult:failed code=" + e.getStatusCode());
 
         }
     }
@@ -237,16 +240,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_Google_SignOut:
                 signOut();
                 break;
-            case  R.id.btn_Go:
+            case R.id.btn_Go:
                 LoginAsyncTask loginAsyncTask = new LoginAsyncTask(this);
                 loginAsyncTask.execute(txtUserName.getText().toString(), txtPassword.getText().toString());
                 break;
             case R.id.btn_Creat:
-                Intent i = new Intent(this,SignUpActivity.class);
+                Intent i = new Intent(this, SignUpActivity.class);
                 startActivity(i);
                 break;
         }
     }
+
     private void signOut() {
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
@@ -258,7 +262,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void showToast(Boolean aBoolean) {
-        Toast.makeText(getApplicationContext(), "Connect: " + aBoolean, Toast.LENGTH_LONG).show();
+    public void connectServer(Boolean aBoolean) {
+        if (aBoolean) {
+            Intent i2 = new Intent(this, MainActivity.class);
+            startActivity(i2);
+        } else
+            Toast.makeText(getApplicationContext(), "Connect: " + aBoolean + ". Check username and password", Toast.LENGTH_LONG).show();
     }
 }

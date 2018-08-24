@@ -5,6 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorfacebook">#5585c5</color>
     <color name="colorgoogle">#EA151E</color>
+    <color name="buttonword">#289FEE</color>
     <color name="textUp">#ec8a03</color>
     <color name="textDown">#757575</color>
+    <color name="imgPhu">#00bf8a</color>
+        <color name="imgPhu_2">#FFFF8800</color>
 </resources>
