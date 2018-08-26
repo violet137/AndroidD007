@@ -7,5 +7,4 @@ public interface HiddenRecord {
     void setUnableBtnRecord();
     void setAbleBtnRecord();
     void chooseQuestion(QuestionDone questionDone);
-    void stopAll();
 }

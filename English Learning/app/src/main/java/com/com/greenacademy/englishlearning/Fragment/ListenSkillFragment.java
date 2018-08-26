@@ -114,7 +114,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord {
         recourdingTime = convertToList(getActivity().getResources().getIntArray(R.array.recording_time));
 
         seekBar.setEnabled(false);
-        imgRecord.setEnabled(false);
+        imgRecord.setVisibility(View.INVISIBLE);
 
 
         this.mediaPlayer = MediaPlayer.create(getContext(), R.raw.dailylife001);
@@ -283,7 +283,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord {
     }
 
 
-    public void playRecord(int currenPossition) {
+    public void playRecord(int currentPosition) {
         int duration = mediaPlayer.getDuration();
 
         seekBar.setMax(duration);
@@ -385,7 +385,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord {
                     tvRecord.setVisibility(View.INVISIBLE);
                     imgListen.setVisibility(View.GONE);
                     imgListenSample.setVisibility(View.GONE);
-                    imgRecord.setEnabled(false);
+                    imgRecord.setVisibility(View.INVISIBLE);
                 }
             });
         }
@@ -403,7 +403,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord {
                 tvRecord.setVisibility(View.INVISIBLE);
                 imgListen.setVisibility(View.VISIBLE);
                 imgListenSample.setVisibility(View.VISIBLE);
-                imgRecord.setEnabled(false);
+                imgRecord.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -417,7 +417,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord {
                     tvSaying.setVisibility(View.VISIBLE);
                     tvRecordingText.setVisibility(View.VISIBLE);
                     tvRecord.setVisibility(View.VISIBLE);
-                    imgRecord.setEnabled(true);
+                    imgRecord.setVisibility(View.VISIBLE);
                 }
             });
         }
@@ -426,23 +426,6 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord {
     @Override
     public void chooseQuestion(final QuestionDone questionDone) {
         pathSave = questionDone.getPathFile();
-        isPlaying = STOP;
-        currenPossition = questionDone.getMilisecord() + 1;
-        recordingAdapter.setPositionChoosed(questionDone.getNumberOfQuestion());
-        recordingAdapter.notifyDataSetChanged();
-        mediaPlayer.seekTo(questionDone.getMilisecord());
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                seekBar.setProgress(questionDone.getMilisecord());
-                seekBar.setEnabled(false);
-                imgPlay.setImageResource(R.drawable.play_button);
-            }
-        });
     }
 
-    @Override
-    public void stopAll() {
-
-    }
 }
