@@ -9,16 +9,17 @@ import com.com.greenacademy.englishlearning.Fragment.ListLessonFragment;
 import com.com.greenacademy.englishlearning.Fragment.ListenSkillFragment;
 import com.greenacademy.englishlearning.R;
 
-public class ListenSkillActivity extends AppCompatActivity {
+public class LessonOfListenSkillActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_skill);
+        setContentView(R.layout.activity_lesson_of_listen_skill);
 
-        ListLessonFragment listLessonFragment = new ListLessonFragment();
+        ListenSkillFragment listenSkillFragment = new ListenSkillFragment();
+        listenSkillFragment.setIdLesson(getIntent().getIntExtra("idLesson", -1));
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, listLessonFragment).commit();
+        fragmentTransaction.replace(R.id.container, listenSkillFragment).commit();
     }
 }

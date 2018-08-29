@@ -32,10 +32,7 @@
     </string-array>
 
     <integer-array name="recording_time">
-        <item>1000</item>
-        <item>9650</item>
-        <item>22260</item>
-        <item>31109</item>
+
     </integer-array>
 
 
@@ -99,15 +96,15 @@
     </array>
 
     <array name="number_checked">
-    <item>@drawable/one_checked</item>
-    <item>@drawable/two_checked</item>
-    <item>@drawable/three_checked</item>
-    <item>@drawable/four_checked</item>
-    <item>@drawable/five_checked</item>
-    <item>@drawable/six_checked</item>
-    <item>@drawable/seven_checked</item>
-    <item>@drawable/eight_checked</item>
-    <item>@drawable/nine_checked</item>
-    <item>@drawable/ten_checked</item>
+        <item>@drawable/one_checked</item>
+        <item>@drawable/two_checked</item>
+        <item>@drawable/three_checked</item>
+        <item>@drawable/four_checked</item>
+        <item>@drawable/five_checked</item>
+        <item>@drawable/six_checked</item>
+        <item>@drawable/seven_checked</item>
+        <item>@drawable/eight_checked</item>
+        <item>@drawable/nine_checked</item>
+        <item>@drawable/ten_checked</item>
     </array>
 </resources>

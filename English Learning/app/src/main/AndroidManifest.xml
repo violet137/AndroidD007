@@ -20,8 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.com.greenacademy.englishlearning.Activity.SignUpActivity"></activity>
-        <activity android:name="com.com.greenacademy.englishlearning.Activity.MainActivity"></activity>
+        <activity android:name="com.com.greenacademy.englishlearning.Activity.SignUpActivity" />
+        <activity android:name="com.com.greenacademy.englishlearning.Activity.MainActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -46,7 +46,8 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name="com.com.greenacademy.englishlearning.Activity.ListenSkillActivity"></activity>
+        <activity android:name="com.com.greenacademy.englishlearning.Activity.ListenSkillActivity" />
+        <activity android:name="com.com.greenacademy.englishlearning.Activity.LessonOfListenSkillActivity"></activity>
     </application>
 
 </manifest>

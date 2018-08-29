@@ -1,7 +1,9 @@
 package com.com.greenacademy.englishlearning.Fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -23,7 +25,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.com.greenacademy.englishlearning.Adapter.RecordingAdapter;
+import com.com.greenacademy.englishlearning.AsyncTask.GetLessonAsyncTask;
+import com.com.greenacademy.englishlearning.Interface.GetterAudio;
 import com.com.greenacademy.englishlearning.Interface.HiddenRecord;
+import com.com.greenacademy.englishlearning.Model.AudioLesson;
 import com.com.greenacademy.englishlearning.Model.QuestionDone;
 import com.greenacademy.englishlearning.R;
 
@@ -33,7 +38,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-public class ListenSkillFragment extends Fragment implements HiddenRecord {
+public class ListenSkillFragment extends Fragment implements HiddenRecord, GetterAudio {
     final int PLAY = 1;
     final int STOP = -1;
     final int PAUSE = 0;
@@ -46,12 +51,16 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord {
     ImageView imgPlay, imgRecord, imgListen, imgListenSample;
     int isPlaying = STOP;
 
-    String[] english;
-    String[] vietsub;
+
     String[] recordingText;
 
-    List block;
-    List recourdingTime;
+    AudioLesson audioLesson;
+    List<String> english;
+    List<String> vietsub;
+    List<Integer> block;
+
+
+    List recordingTime;
 
     int numberOfQuestion = -1;
     int milisecordOfQuestion = 0;
@@ -61,6 +70,12 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord {
 
     RecyclerView recyclerView;
     RecordingAdapter recordingAdapter;
+
+    int idLesson;
+
+    public void setIdLesson(int idLesson) {
+        this.idLesson = idLesson;
+    }
 
     public List convertToList(int[] strings) {
         List list = new ArrayList();
@@ -106,167 +121,18 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord {
         tvSaying = view.findViewById(R.id.tvSaying);
         tvRecordingText = view.findViewById(R.id.tvRecordingText);
         tvRecord = view.findViewById(R.id.tvRecord);
-        english = getActivity().getResources().getStringArray(R.array.conversation);
-        vietsub = getActivity().getResources().getStringArray(R.array.vietsub);
-        block = convertToList(getActivity().getResources().getIntArray(R.array.block));
+
 
         recordingText = getActivity().getResources().getStringArray(R.array.recording_text);
-        recourdingTime = convertToList(getActivity().getResources().getIntArray(R.array.recording_time));
+        recordingTime = convertToList(getActivity().getResources().getIntArray(R.array.recording_time));
 
         seekBar.setEnabled(false);
         imgRecord.setVisibility(View.INVISIBLE);
-
-
-        this.mediaPlayer = MediaPlayer.create(getContext(), R.raw.dailylife001);
-
-        imgPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isPlaying == PAUSE && seekBar.isEnabled() == false) {
-                    recordingAdapter.setPositionChoosed(-1);
-                    recordingAdapter.notifyDataSetChanged();
-                    numberOfQuestion = -1;
-                    milisecordOfQuestion = 0;
-                    isPlaying = PLAY;
-                    mediaPlayer.start();
-                    imgPlay.setImageResource(R.drawable.pause);
-                    seekBar.setEnabled(true);
-                } else if (isPlaying == STOP) {
-                    isPlaying = PLAY;
-                    playRecord(currenPossition);
-                    updateUI();
-                    imgPlay.setImageResource(R.drawable.pause);
-                    seekBar.setEnabled(true);
-                } else if (isPlaying == PLAY) {
-                    mediaPlayer.pause();
-                    imgPlay.setImageResource(R.drawable.play_button);
-                    isPlaying = PAUSE;
-                } else if (isPlaying == PAUSE) {
-                    isPlaying = PLAY;
-                    mediaPlayer.start();
-                    imgPlay.setImageResource(R.drawable.pause);
-                    seekBar.setEnabled(true);
-                }
-            }
-        });
-
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser) {
-                    mediaPlayer.seekTo(progress);
-                    if (progress > Integer.valueOf(block.get(block.size() - 2).toString()) && progress <= Integer.valueOf(block.get(block.size() - 1).toString())) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                tvEnglishSaying.setText(english[block.size() - 2]);
-                                tvEnglishPrepare.setText("");
-                                tvVietnamese.setText(vietsub[block.size() - 2]);
-                            }
-                        });
-                    } else if (progress == 0) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                tvEnglishSaying.setText(english[0]);
-                                tvEnglishPrepare.setText(english[0 + 1]);
-                                tvVietnamese.setText(vietsub[0]);
-                            }
-                        });
-                    } else {
-                        for (int i = 0; i < block.size(); i++) {
-                            final int index = i;
-                            if (progress > Integer.valueOf(block.get(i).toString()) && progress < Integer.valueOf(block.get(i + 1).toString())) {
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        tvEnglishSaying.setText(english[index]);
-                                        tvEnglishPrepare.setText(english[index + 1]);
-                                        tvVietnamese.setText(vietsub[index]);
-                                    }
-                                });
-                            }
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-//              isChanged = true;
-            }
-        });
-
         recyclerView = view.findViewById(R.id.recycleView);
-        recordingAdapter = new RecordingAdapter();
-        recordingAdapter.setListOfText(recordingText);
-        recordingAdapter.setHiddenRecord(this);
-//        recordingAdapter.setPositionChoosed(2);
-//        recordingAdapter.addQuestionDone(0);
-//        recordingAdapter.addQuestionDone(4);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(recordingAdapter);
 
-
-        imgRecord.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        imgListen.setVisibility(View.GONE);
-                        imgListenSample.setVisibility(View.GONE);
-                        tvNgheLai.setVisibility(View.GONE);
-                        tvNgheMau.setVisibility(View.GONE);
-                        pathSave = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + UUID.randomUUID().toString() + "_audio_record.3gp";
-                        setUpMediaRecord();
-                        try {
-                            mediaRecorder.prepare();
-                            mediaRecorder.start();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        imgRecord.setImageResource(R.drawable.radio);
-                        Toast.makeText(getContext(), "Recording...", Toast.LENGTH_LONG).show();
-                        break;
-
-                    case MotionEvent.ACTION_UP:
-                        mediaRecorder.stop();
-                        imgListen.setVisibility(View.VISIBLE);
-                        imgListenSample.setVisibility(View.VISIBLE);
-                        tvNgheLai.setVisibility(View.VISIBLE);
-                        tvNgheMau.setVisibility(View.VISIBLE);
-                        Toast.makeText(getContext(), "Stop Recording...", Toast.LENGTH_LONG).show();
-                        // add question done
-                        if (numberOfQuestion > -1) {
-                            recordingAdapter.addPathFile(numberOfQuestion, pathSave);
-                            recordingAdapter.notifyDataSetChanged();
-                        }
-
-                        break;
-                }
-                return false;
-            }
-        });
-
-        imgListen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mediaPlayerOfRecord = new MediaPlayer();
-                try {
-                    mediaPlayerOfRecord.setDataSource(pathSave);
-                    mediaPlayerOfRecord.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                mediaPlayerOfRecord.start();
-                Toast.makeText(getContext(), "Play Record...", Toast.LENGTH_LONG).show();
-            }
-        });
+        GetLessonAsyncTask getLessonAsyncTask = new GetLessonAsyncTask();
+        getLessonAsyncTask.setGetterAudio(this);
+        getLessonAsyncTask.execute(idLesson);
 
 
         return view;
@@ -310,7 +176,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord {
                     final String maxTimeString = millisecondsToString(duration);
                     final String currentTimeString = millisecondsToString(currentPosition);
                     final int index = block.indexOf(currentPosition);
-                    final int indexOfRecording = recourdingTime.indexOf(currentPosition);
+                    final int indexOfRecording = recordingTime.indexOf(currentPosition);
                     seekBar.setProgress(currentPosition);
 
                     getActivity().runOnUiThread(new Runnable() {
@@ -318,14 +184,14 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord {
                         public void run() {
                             tvDuration.setText(currentTimeString + "/" + maxTimeString);
                             if (index > -1) {
-                                if (index == english.length - 1) {
-                                    tvEnglishSaying.setText(english[index]);
+                                if (index == english.size() - 1) {
+                                    tvEnglishSaying.setText(english.get(index));
                                     tvEnglishPrepare.setText("");
-                                    tvVietnamese.setText(vietsub[index]);
-                                } else if (index < english.length - 1) {
-                                    tvEnglishSaying.setText(english[index]);
-                                    tvEnglishPrepare.setText(english[index + 1]);
-                                    tvVietnamese.setText(vietsub[index]);
+                                    tvVietnamese.setText(vietsub.get(index));
+                                } else if (index < english.size() - 1) {
+                                    tvEnglishSaying.setText(english.get(index));
+                                    tvEnglishPrepare.setText(english.get(index + 1));
+                                    tvVietnamese.setText(vietsub.get(index));
                                 }
                             }
                         }
@@ -426,6 +292,176 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord {
     @Override
     public void chooseQuestion(final QuestionDone questionDone) {
         pathSave = questionDone.getPathFile();
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public void getAudio(AudioLesson audioLesson) {
+
+        this.audioLesson = audioLesson;
+
+        english = audioLesson.getListText();
+        vietsub = audioLesson.getListTextTrans();
+        block = audioLesson.getListTime();
+
+        System.out.println("done ==============");
+
+        this.mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        try {
+            mediaPlayer.setDataSource(audioLesson.getAudioUrl());
+            mediaPlayer.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        imgPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isPlaying == PAUSE && seekBar.isEnabled() == false) {
+                    recordingAdapter.setPositionChoosed(-1);
+                    recordingAdapter.notifyDataSetChanged();
+                    numberOfQuestion = -1;
+                    milisecordOfQuestion = 0;
+                    isPlaying = PLAY;
+                    mediaPlayer.start();
+                    imgPlay.setImageResource(R.drawable.pause);
+                    seekBar.setEnabled(true);
+                } else if (isPlaying == STOP) {
+                    isPlaying = PLAY;
+                    playRecord(currenPossition);
+                    updateUI();
+                    imgPlay.setImageResource(R.drawable.pause);
+                    seekBar.setEnabled(true);
+                } else if (isPlaying == PLAY) {
+                    mediaPlayer.pause();
+                    imgPlay.setImageResource(R.drawable.play_button);
+                    isPlaying = PAUSE;
+                } else if (isPlaying == PAUSE) {
+                    isPlaying = PLAY;
+                    mediaPlayer.start();
+                    imgPlay.setImageResource(R.drawable.pause);
+                    seekBar.setEnabled(true);
+                }
+            }
+        });
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    mediaPlayer.seekTo(progress);
+                    if (progress > Integer.valueOf(block.get(block.size() - 1).toString())) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                tvEnglishSaying.setText(english.get(block.size() - 1));
+                                tvEnglishPrepare.setText("");
+                                tvVietnamese.setText(vietsub.get(block.size() - 1));
+                            }
+                        });
+                    } else if (progress == 0) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                tvEnglishSaying.setText(english.get(0));
+                                tvEnglishPrepare.setText(english.get(0 + 1));
+                                tvVietnamese.setText(vietsub.get(0));
+                            }
+                        });
+                    } else {
+                        for (int i = 0; i < block.size(); i++) {
+                            final int index = i;
+                            if (progress > Integer.valueOf(block.get(i).toString()) && progress < Integer.valueOf(block.get(i + 1).toString())) {
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        tvEnglishSaying.setText(english.get(index));
+                                        tvEnglishPrepare.setText(english.get(index + 1));
+                                        tvVietnamese.setText(vietsub.get(index));
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+//              isChanged = true;
+            }
+        });
+
+        recordingAdapter = new RecordingAdapter();
+        recordingAdapter.setListOfText(recordingText);
+        recordingAdapter.setHiddenRecord(this);
+//        recordingAdapter.setPositionChoosed(2);
+//        recordingAdapter.addQuestionDone(0);
+//        recordingAdapter.addQuestionDone(4);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(recordingAdapter);
+
+
+        imgRecord.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        imgListen.setVisibility(View.GONE);
+                        imgListenSample.setVisibility(View.GONE);
+                        tvNgheLai.setVisibility(View.GONE);
+                        tvNgheMau.setVisibility(View.GONE);
+                        pathSave = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + UUID.randomUUID().toString() + "_audio_record.3gp";
+                        setUpMediaRecord();
+                        try {
+                            mediaRecorder.prepare();
+                            mediaRecorder.start();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        imgRecord.setImageResource(R.drawable.radio);
+                        Toast.makeText(getContext(), "Recording...", Toast.LENGTH_LONG).show();
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        mediaRecorder.stop();
+                        imgListen.setVisibility(View.VISIBLE);
+                        imgListenSample.setVisibility(View.VISIBLE);
+                        tvNgheLai.setVisibility(View.VISIBLE);
+                        tvNgheMau.setVisibility(View.VISIBLE);
+                        Toast.makeText(getContext(), "Stop Recording...", Toast.LENGTH_LONG).show();
+                        // add question done
+                        if (numberOfQuestion > -1) {
+                            recordingAdapter.addPathFile(numberOfQuestion, pathSave);
+                            recordingAdapter.notifyDataSetChanged();
+                        }
+
+                        break;
+                }
+                return false;
+            }
+        });
+
+        imgListen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayerOfRecord = new MediaPlayer();
+                try {
+                    mediaPlayerOfRecord.setDataSource(pathSave);
+                    mediaPlayerOfRecord.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mediaPlayerOfRecord.start();
+                Toast.makeText(getContext(), "Play Record...", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }
