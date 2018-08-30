@@ -170,6 +170,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             handleSignInResult(task);
             Intent i2 = new Intent(this, MainActivity.class);
             startActivity(i2);
+            this.finish();
         }
     }
 
@@ -266,6 +267,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (aBoolean) {
             Intent i2 = new Intent(this, MainActivity.class);
             startActivity(i2);
+            this.finish();
         } else
             Toast.makeText(getApplicationContext(), "Connect: " + aBoolean + ". Check username and password", Toast.LENGTH_LONG).show();
     }

@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHolder> {
-
-    String[] listOfText;
+    List<String> listOfText;
     int positionChoosed = -1;
     List<Integer> listNumberIcon = new ArrayList<>();
     List<Integer> listNumberIconChecked = new ArrayList<>();
@@ -42,7 +41,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
         }
     }
 
-    public void setListOfText(String[] listOfText) {
+    public void setListOfText(List<String> listOfText) {
         this.listOfText = listOfText;
     }
 
@@ -100,7 +99,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
         holder.imgChinh.setEnabled(false);
 
 
-        if (position == listOfText.length - 1) {
+        if (position == listOfText.size() - 1) {
             holder.imgPhu.setVisibility(View.GONE);
         }
 
@@ -131,6 +130,6 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
 
     @Override
     public int getItemCount() {
-        return listOfText.length;
+        return listOfText.size();
     }
 }

@@ -72,6 +72,8 @@ public class GetLessonAsyncTask extends AsyncTask<Integer, Void, AudioLesson> {
                             List<String> listText = new ArrayList<>();
                             List<String> listTextTrans = new ArrayList<>();
                             List<Integer> listTime = new ArrayList<>();
+                            List<String> listRecordingText = new ArrayList<>();
+                            List<Integer> listRecordingTime = new ArrayList<>();
 
                             for (int i = 0; i < sentenceDatas.length(); i++) {
                                 JSONObject sentenData = sentenceDatas.getJSONObject(i);
@@ -80,13 +82,21 @@ public class GetLessonAsyncTask extends AsyncTask<Integer, Void, AudioLesson> {
                                 String name = sentenData.getString("Name");
                                 int time = sentenData.getInt("Time");
 
+                                boolean isRecord = sentenData.getBoolean("IsRecord");
+
+                                if (isRecord) {
+                                    listRecordingText.add(text);
+                                    listRecordingTime.add(time);
+                                }
+
+
                                 listText.add(name + " : " + text);
                                 listTextTrans.add(name + " : " + textTrans);
                                 listTime.add(time);
                             }
                             String audioUrl = conversation.getString("AudioUrl");
 
-                            AudioLesson audioLesson = new AudioLesson(listText, listTextTrans, listTime, audioUrl);
+                            AudioLesson audioLesson = new AudioLesson(listText, listTextTrans, listTime, listRecordingText, listRecordingTime, audioUrl);
 
                             return audioLesson;
                         }

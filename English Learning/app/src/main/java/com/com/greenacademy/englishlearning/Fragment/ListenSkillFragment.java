@@ -52,7 +52,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
     int isPlaying = STOP;
 
 
-    String[] recordingText;
+    List<String> recordingText;
 
     AudioLesson audioLesson;
     List<String> english;
@@ -60,7 +60,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
     List<Integer> block;
 
 
-    List recordingTime;
+    List<Integer> recordingTime;
 
     int numberOfQuestion = -1;
     int milisecordOfQuestion = 0;
@@ -122,9 +122,6 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
         tvRecordingText = view.findViewById(R.id.tvRecordingText);
         tvRecord = view.findViewById(R.id.tvRecord);
 
-
-        recordingText = getActivity().getResources().getStringArray(R.array.recording_text);
-        recordingTime = convertToList(getActivity().getResources().getIntArray(R.array.recording_time));
 
         seekBar.setEnabled(false);
         imgRecord.setVisibility(View.INVISIBLE);
@@ -204,7 +201,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
                             if (indexOfRecording > -1) {
                                 recordingAdapter.setPositionChoosed(indexOfRecording);
                                 mediaPlayer.pause();
-                                tvRecordingText.setText(recordingText[indexOfRecording]);
+                                tvRecordingText.setText(recordingText.get(indexOfRecording));
                                 isPlaying = PAUSE;
                                 imgPlay.setImageResource(R.drawable.play_button);
                                 seekBar.setEnabled(false);
@@ -303,6 +300,8 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
         english = audioLesson.getListText();
         vietsub = audioLesson.getListTextTrans();
         block = audioLesson.getListTime();
+        recordingText = audioLesson.getListRecordingText();
+        recordingTime = audioLesson.getListRecordingTime();
 
         System.out.println("done ==============");
 
@@ -417,7 +416,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
                         imgListenSample.setVisibility(View.GONE);
                         tvNgheLai.setVisibility(View.GONE);
                         tvNgheMau.setVisibility(View.GONE);
-                        pathSave = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + UUID.randomUUID().toString() + "_audio_record.3gp";
+                        pathSave = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Lesson_" + String.valueOf(idLesson) + "_Question_" + String.valueOf(numberOfQuestion) + "_audio_record.3gp";
                         setUpMediaRecord();
                         try {
                             mediaRecorder.prepare();
@@ -441,7 +440,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
                             recordingAdapter.addPathFile(numberOfQuestion, pathSave);
                             recordingAdapter.notifyDataSetChanged();
                         }
-
+                        Toast.makeText(getContext(), pathSave, Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return false;

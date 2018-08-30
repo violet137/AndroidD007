@@ -6,15 +6,19 @@ public class AudioLesson {
     List<String> listText;
     List<String> listTextTrans;
     List<Integer> listTime;
+    List<String> listRecordingText;
+    List<Integer> listRecordingTime;
     String audioUrl;
 
     public AudioLesson() {
     }
 
-    public AudioLesson(List<String> listText, List<String> listTextTrans, List<Integer> listTime, String audioUrl) {
+    public AudioLesson(List<String> listText, List<String> listTextTrans, List<Integer> listTime, List<String> listRecordingText, List<Integer> listRecordingTime, String audioUrl) {
         this.listText = listText;
         this.listTextTrans = listTextTrans;
         this.listTime = listTime;
+        this.listRecordingText = listRecordingText;
+        this.listRecordingTime = listRecordingTime;
         this.audioUrl = audioUrl;
     }
 
@@ -48,5 +52,21 @@ public class AudioLesson {
 
     public void setAudioUrl(String audioUrl) {
         this.audioUrl = audioUrl;
+    }
+
+    public List<String> getListRecordingText() {
+        return listRecordingText;
+    }
+
+    public void setListRecordingText(List<String> listRecordingText) {
+        this.listRecordingText = listRecordingText;
+    }
+
+    public List<Integer> getListRecordingTime() {
+        return listRecordingTime;
+    }
+
+    public void setListRecordingTime(List<Integer> listRecordingTime) {
+        this.listRecordingTime = listRecordingTime;
     }
 }
