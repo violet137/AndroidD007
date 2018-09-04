@@ -28,7 +28,7 @@ public class GetLessonAsyncTask extends AsyncTask<Integer, Void, AudioLesson> {
     protected AudioLesson doInBackground(Integer... integers) {
         try {
             int idLesson = integers[0];
-            String urlServer = "http://tamod.vn:8081/api/LessionDetail/LessionDetailById?idLession=" + idLesson;
+            String urlServer = "http://tamod.vn:8081/api/LessionDetail/ConversationById?idLession=" + idLesson;
             URL url = new URL(urlServer);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 //            connection.setRequestMethod("GET");
@@ -65,9 +65,7 @@ public class GetLessonAsyncTask extends AsyncTask<Integer, Void, AudioLesson> {
                     JSONObject responseServer = new JSONObject(responseJson);
                     int status = responseServer.getInt("Status");
                     if (status == 1) {
-                        JSONObject lessonDetailTranfer = responseServer.getJSONObject("LessionDetailTranfer");
-                        JSONObject conversation = lessonDetailTranfer.getJSONObject("Conversation");
-                        JSONArray sentenceDatas = conversation.getJSONArray("SentenceDatas");
+                        JSONArray sentenceDatas = responseServer.getJSONArray("SentenceDatas");
                         if (sentenceDatas.length() > 0) {
                             List<String> listText = new ArrayList<>();
                             List<String> listTextTrans = new ArrayList<>();
@@ -94,7 +92,7 @@ public class GetLessonAsyncTask extends AsyncTask<Integer, Void, AudioLesson> {
                                 listTextTrans.add(name + " : " + textTrans);
                                 listTime.add(time);
                             }
-                            String audioUrl = conversation.getString("AudioUrl");
+                            String audioUrl = responseServer.getString("AudioUrl");
 
                             AudioLesson audioLesson = new AudioLesson(listText, listTextTrans, listTime, listRecordingText, listRecordingTime, audioUrl);
 
