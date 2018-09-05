@@ -31,6 +31,7 @@ import com.com.greenacademy.englishlearning.Interface.GetterAudio;
 import com.com.greenacademy.englishlearning.Interface.HiddenRecord;
 import com.com.greenacademy.englishlearning.Model.AudioLesson;
 import com.com.greenacademy.englishlearning.Model.QuestionDone;
+import com.com.greenacademy.englishlearning.Model.Recording;
 import com.greenacademy.englishlearning.R;
 
 import java.io.IOException;
@@ -127,7 +128,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
         seekBar.setEnabled(false);
         imgRecord.setVisibility(View.INVISIBLE);
         recyclerView = view.findViewById(R.id.recycleView);
-
+//
 //        GetLessonAsyncTask getLessonAsyncTask = new GetLessonAsyncTask();
 //        getLessonAsyncTask.setGetterAudio(this);
 //        getLessonAsyncTask.execute(idLesson);
@@ -135,7 +136,24 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
         SendRecordingAsyncTask sendRecordingAsyncTask = new SendRecordingAsyncTask();
         sendRecordingAsyncTask.setListenSkillFragment(this);
         sendRecordingAsyncTask.setIdLesson(idLesson);
-        sendRecordingAsyncTask.execute();
+        sendRecordingAsyncTask.execute(new Recording(0, Environment.getExternalStorageDirectory().getAbsolutePath() + "/Lesson_1" + "_Question_0" + "_audio_record.3gp"));
+
+//        try {
+//            mediaPlayerOfRecord = new MediaPlayer();
+//            String haha = "/storage/emulated/0/Lesson_1_Question_0_audio_record.3gp";
+//            String hihi = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Lesson_1" + "_Question_0" + "_audio_record.3gp";
+//            mediaPlayerOfRecord.setDataSource(hihi);
+//            mediaPlayerOfRecord.prepare();
+//            mediaPlayerOfRecord.start();
+//            Toast.makeText(getContext(), haha, Toast.LENGTH_LONG).show();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+//                /storage/emulated/0/Lesson_1_Question_0_audio_record.3gp
+//        /storage/sdcard1/Lesson_1_Question_0_audio_record.3gp
+//                /storage/emulated/0/Lesson_1_Question_0_audio_record.3gp
 
         return view;
 
@@ -446,6 +464,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
                             recordingAdapter.notifyDataSetChanged();
                         }
                         Toast.makeText(getContext(), pathSave, Toast.LENGTH_SHORT).show();
+                        System.out.println(pathSave);
                         break;
                 }
                 return false;

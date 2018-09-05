@@ -2,6 +2,7 @@ package com.com.greenacademy.englishlearning.AsyncTask;
 
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Base64;
 
 import com.com.greenacademy.englishlearning.Fragment.ListenSkillFragment;
 import com.com.greenacademy.englishlearning.Model.Recording;
@@ -36,11 +37,12 @@ public class SendRecordingAsyncTask extends AsyncTask<Recording, Void, Boolean> 
     @Override
     protected Boolean doInBackground(Recording... recordings) {
 
-        byte[] soundBytes = getData(recordings[0].getPathAudio());
-        System.out.println(String.valueOf(soundBytes) + "  -============= SoundBytes");
-        if (soundBytes != null) {
+        String dataSoundBase64 = getData(recordings[0].getPathAudio());
+        int index = recordings[0].getIndexSentence();
+
+        if (dataSoundBase64 != null) {
             try {
-                String urlServer = "http://tamod.vn:8081/api/Record/RecordAudio?idLession=" + idLesson + "&loaiBaiHoc=Conversation&indexSentence=" + recordings[0].getIndexSentence();
+                String urlServer = "http://tamod.vn:8081/api/Record/RecordAudio";
                 URL url = new URL(urlServer);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -53,7 +55,10 @@ public class SendRecordingAsyncTask extends AsyncTask<Recording, Void, Boolean> 
 
 
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("dataAudio", soundBytes);
+                jsonObject.put("IdLession", 0);
+                jsonObject.put("LoaiBaiHoc", "Conversation");
+                jsonObject.put("IndexSentence", 0);
+                jsonObject.put("DataAudio64", dataSoundBase64);
                 //gui data len server
                 OutputStream outputStream = connection.getOutputStream();
                 DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
@@ -112,19 +117,20 @@ public class SendRecordingAsyncTask extends AsyncTask<Recording, Void, Boolean> 
         return out.toByteArray();
     }
 
-    private byte[] getData(String file) {
-        byte[] soundBytes = null;
-
+    private String getData(String file) {
         String outputFile = file;
+        String dataBase64 = null;
 
         try {
             InputStream inputStream = listenSkillFragment.getContext().getContentResolver().openInputStream(Uri.fromFile(new File(outputFile)));
-            soundBytes = new byte[inputStream.available()];
+            byte[] soundBytes;
             soundBytes = toByteArray(inputStream);
+            dataBase64 = Base64.encodeToString(soundBytes, Base64.DEFAULT);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return soundBytes;
+        return dataBase64;
     }
+
 }
