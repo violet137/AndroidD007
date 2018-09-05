@@ -14,11 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.com.greenacademy.englishlearning.Activity.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.com.greenacademy.englishlearning.Activity.SignUpActivity" />
         <activity android:name="com.com.greenacademy.englishlearning.Activity.MainActivity" />
@@ -50,7 +46,11 @@
 
         </activity>
         <activity android:name="com.com.greenacademy.englishlearning.Activity.LessonOfListenSkillActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

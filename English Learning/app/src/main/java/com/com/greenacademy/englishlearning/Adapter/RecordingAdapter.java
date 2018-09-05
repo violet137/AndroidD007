@@ -1,28 +1,26 @@
 package com.com.greenacademy.englishlearning.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
 import com.com.greenacademy.englishlearning.Holder.ItemViewRecordingHolder;
 import com.com.greenacademy.englishlearning.Interface.HiddenRecord;
 import com.com.greenacademy.englishlearning.Model.QuestionDone;
 import com.greenacademy.englishlearning.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHolder> {
-    List<String> listOfText;
-    int positionChoosed = -1;
-    List<Integer> listNumberIcon = new ArrayList<>();
-    List<Integer> listNumberIconChecked = new ArrayList<>();
-    List<QuestionDone> listQuestionDone = new ArrayList<>();
-    HiddenRecord hiddenRecord;
+    private List<String> listOfText;
+    private int positionChoosed = -1;
+    private List<Integer> listNumberIcon = new ArrayList<>();
+    private List<Integer> listNumberIconChecked = new ArrayList<>();
+    private List<QuestionDone> listQuestionDone = new ArrayList<>();
+    private HiddenRecord hiddenRecord;
 
     public void setPositionChoosed(int positionChoosed) {
         this.positionChoosed = positionChoosed;
@@ -49,7 +47,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
         this.hiddenRecord = hiddenRecord;
     }
 
-    public boolean checkQuestionDone(int position) {
+    private boolean checkQuestionDone(int position) {
         for (int i = 0; i < listQuestionDone.size(); i++) {
             if (listQuestionDone.get(i).getNumberOfQuestion() == position) {
                 return true;
@@ -67,7 +65,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
         }
     }
 
-    public boolean checkNullRecord(int position) {
+    private boolean checkNullRecord(int position) {
         for (int i = 0; i < listQuestionDone.size(); i++) {
             if (listQuestionDone.get(i).getNumberOfQuestion() == position) {
                 if (listQuestionDone.get(i).getPathFile() != null)
@@ -81,11 +79,11 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
     @Override
     public ItemViewRecordingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recordding_recycle_view, parent, false);
-        TypedArray list = view.getResources().obtainTypedArray(R.array.number);
+        @SuppressLint("Recycle") TypedArray list = view.getResources().obtainTypedArray(R.array.number);
         for (int i = 0; i < list.length(); i++) {
             listNumberIcon.add(list.getResourceId(i, -1));
         }
-        TypedArray listChecked = view.getResources().obtainTypedArray(R.array.number_checked);
+        @SuppressLint("Recycle") TypedArray listChecked = view.getResources().obtainTypedArray(R.array.number_checked);
         for (int i = 0; i < list.length(); i++) {
             listNumberIconChecked.add(listChecked.getResourceId(i, -1));
         }

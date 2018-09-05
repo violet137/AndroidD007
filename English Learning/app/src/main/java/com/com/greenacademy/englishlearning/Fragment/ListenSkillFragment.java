@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.com.greenacademy.englishlearning.Adapter.RecordingAdapter;
 import com.com.greenacademy.englishlearning.AsyncTask.GetLessonAsyncTask;
+import com.com.greenacademy.englishlearning.AsyncTask.SendRecordingAsyncTask;
 import com.com.greenacademy.englishlearning.Interface.GetterAudio;
 import com.com.greenacademy.englishlearning.Interface.HiddenRecord;
 import com.com.greenacademy.englishlearning.Model.AudioLesson;
@@ -127,10 +128,14 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
         imgRecord.setVisibility(View.INVISIBLE);
         recyclerView = view.findViewById(R.id.recycleView);
 
-        GetLessonAsyncTask getLessonAsyncTask = new GetLessonAsyncTask();
-        getLessonAsyncTask.setGetterAudio(this);
-        getLessonAsyncTask.execute(idLesson);
+//        GetLessonAsyncTask getLessonAsyncTask = new GetLessonAsyncTask();
+//        getLessonAsyncTask.setGetterAudio(this);
+//        getLessonAsyncTask.execute(idLesson);
 
+        SendRecordingAsyncTask sendRecordingAsyncTask = new SendRecordingAsyncTask();
+        sendRecordingAsyncTask.setListenSkillFragment(this);
+        sendRecordingAsyncTask.setIdLesson(idLesson);
+        sendRecordingAsyncTask.execute();
 
         return view;
 

@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import com.com.greenacademy.englishlearning.Interface.GetterAudio;
 import com.com.greenacademy.englishlearning.Model.AudioLesson;
+import com.com.greenacademy.englishlearning.Model.Recording;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -72,6 +73,7 @@ public class GetLessonAsyncTask extends AsyncTask<Integer, Void, AudioLesson> {
                             List<Integer> listTime = new ArrayList<>();
                             List<String> listRecordingText = new ArrayList<>();
                             List<Integer> listRecordingTime = new ArrayList<>();
+                            List<Recording> listRecording = new ArrayList<>();
 
                             for (int i = 0; i < sentenceDatas.length(); i++) {
                                 JSONObject sentenData = sentenceDatas.getJSONObject(i);
@@ -94,7 +96,22 @@ public class GetLessonAsyncTask extends AsyncTask<Integer, Void, AudioLesson> {
                             }
                             String audioUrl = responseServer.getString("AudioUrl");
 
-                            AudioLesson audioLesson = new AudioLesson(listText, listTextTrans, listTime, listRecordingText, listRecordingTime, audioUrl);
+                            JSONArray recordDataTranfers = responseServer.getJSONArray("RecordDataTranfers");
+                            if (recordDataTranfers.length() > 0) {
+                                for (int i = 0; i < recordDataTranfers.length(); i++) {
+                                    JSONObject recordingJson = recordDataTranfers.getJSONObject(i);
+                                    int indexSentence = recordingJson.getInt("IndexSentence");
+                                    JSONArray recordData = recordingJson.getJSONArray("RecordDataTranfers");
+                                    JSONObject record = recordData.getJSONObject(0);
+                                    String pathAudio = record.getString("PathAudio");
+
+                                    Recording recording = new Recording(indexSentence, pathAudio);
+                                    listRecording.add(recording); // add list recording
+                                }
+
+                            }
+
+                            AudioLesson audioLesson = new AudioLesson(listText, listTextTrans, listTime, listRecordingText, listRecordingTime, listRecording, audioUrl);
 
                             return audioLesson;
                         }
