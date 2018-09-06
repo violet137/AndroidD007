@@ -47,14 +47,14 @@
             </intent-filter>
         </activity>
         <activity android:name="com.com.greenacademy.englishlearning.Activity.ListenSkillActivity" >
-
-        </activity>
-        <activity android:name="com.com.greenacademy.englishlearning.Activity.LessonOfListenSkillActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.com.greenacademy.englishlearning.Activity.LessonOfListenSkillActivity">
+
         </activity>
     </application>
 

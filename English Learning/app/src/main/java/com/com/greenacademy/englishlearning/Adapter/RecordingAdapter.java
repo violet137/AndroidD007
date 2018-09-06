@@ -7,10 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.com.greenacademy.englishlearning.AsyncTask.SendRecordingAsyncTask;
+import com.com.greenacademy.englishlearning.Fragment.ListenSkillFragment;
 import com.com.greenacademy.englishlearning.Holder.ItemViewRecordingHolder;
-import com.com.greenacademy.englishlearning.Interface.HiddenRecord;
 import com.com.greenacademy.englishlearning.Model.QuestionDone;
+import com.com.greenacademy.englishlearning.Model.Recording;
 import com.greenacademy.englishlearning.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +24,8 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
     private List<Integer> listNumberIcon = new ArrayList<>();
     private List<Integer> listNumberIconChecked = new ArrayList<>();
     private List<QuestionDone> listQuestionDone = new ArrayList<>();
-    private HiddenRecord hiddenRecord;
+    private ListenSkillFragment listenSkillFragment;
+//    private List<QuestionDone> listQSDone = new ArrayList<>();
 
     public void setPositionChoosed(int positionChoosed) {
         this.positionChoosed = positionChoosed;
@@ -39,12 +44,29 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
         }
     }
 
+    public void addQuestionExist(List<QuestionDone> list) {
+        boolean isFileExist = false;
+        for (int i = 0; i < listOfText.size(); i++) {
+            listQuestionDone.add(new QuestionDone(i, null));
+        }
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getPathFile() != null) {
+                listQuestionDone.get(list.get(i).getNumberOfQuestion()).setPathFile(list.get(i).getPathFile());
+                isFileExist = true;
+            }
+        }
+        if (!isFileExist) {
+            listQuestionDone.clear();
+        }
+
+    }
+
     public void setListOfText(List<String> listOfText) {
         this.listOfText = listOfText;
     }
 
-    public void setHiddenRecord(HiddenRecord hiddenRecord) {
-        this.hiddenRecord = hiddenRecord;
+    public void setListenSkillFragment(ListenSkillFragment listenSkillFragment) {
+        this.listenSkillFragment = listenSkillFragment;
     }
 
     private boolean checkQuestionDone(int position) {
@@ -60,6 +82,12 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
         for (int i = 0; i < listQuestionDone.size(); i++) {
             if (listQuestionDone.get(i).getNumberOfQuestion() == numberOfQuestion) {
                 listQuestionDone.get(i).setPathFile(pathFile);
+
+                SendRecordingAsyncTask sendRecordingAsyncTask = new SendRecordingAsyncTask();
+                sendRecordingAsyncTask.setListenSkillFragment(listenSkillFragment);
+                sendRecordingAsyncTask.setIdLesson(listenSkillFragment.getIdLesson());
+                sendRecordingAsyncTask.execute(new Recording(numberOfQuestion, pathFile));
+
                 break;
             }
         }
@@ -102,25 +130,26 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
         }
 
         if (position == positionChoosed && !checkNullRecord(position)) {
-            hiddenRecord.setAbleBtnRecord();
+            listenSkillFragment.setAbleBtnRecord();
             holder.imgChinh.setImageResource(R.drawable.music);
             holder.imgPhu.setImageResource(R.color.imgPhu_2);
         } else if (checkQuestionDone(position)) {
             if (listQuestionDone.get(position).getPathFile() != null) {
+                System.out.println("pos: " + position + " : " + listQuestionDone.get(position).getPathFile());
                 holder.imgChinh.setImageResource(R.drawable.checking);
                 if (position == positionChoosed) {
-                    hiddenRecord.setUnableBtnRecord();
-                    hiddenRecord.chooseQuestion(listQuestionDone.get(position));
+                    listenSkillFragment.setUnableBtnRecord();
+                    listenSkillFragment.chooseQuestion(listQuestionDone.get(position));
                 }
             } else if (position != positionChoosed && listQuestionDone.get(position).getPathFile() == null) {
                 holder.imgChinh.setImageResource(listNumberIconChecked.get(position));
             }
 
             if (position == listQuestionDone.size() - 1) {
-                hiddenRecord.hideBtnRecord(); // vi tri cuoi cung
+                listenSkillFragment.hideBtnRecord(); // vi tri cuoi cung
             }
         } else {
-            hiddenRecord.hideBtnRecord(); // an nut play record
+            listenSkillFragment.hideBtnRecord(); // an nut play record
             holder.imgChinh.setImageResource(listNumberIcon.get(position));
         }
 

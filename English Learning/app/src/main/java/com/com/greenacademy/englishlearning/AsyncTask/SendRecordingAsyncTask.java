@@ -37,6 +37,8 @@ public class SendRecordingAsyncTask extends AsyncTask<Recording, Void, Boolean> 
     @Override
     protected Boolean doInBackground(Recording... recordings) {
 
+
+
         String dataSoundBase64 = getData(recordings[0].getPathAudio());
         int index = recordings[0].getIndexSentence();
 
@@ -55,9 +57,9 @@ public class SendRecordingAsyncTask extends AsyncTask<Recording, Void, Boolean> 
 
 
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("IdLession", 0);
+                jsonObject.put("IdLession", idLesson);
                 jsonObject.put("LoaiBaiHoc", "Conversation");
-                jsonObject.put("IndexSentence", 0);
+                jsonObject.put("IndexSentence", index);
                 jsonObject.put("DataAudio64", dataSoundBase64);
                 //gui data len server
                 OutputStream outputStream = connection.getOutputStream();
@@ -99,9 +101,9 @@ public class SendRecordingAsyncTask extends AsyncTask<Recording, Void, Boolean> 
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
         if (aBoolean) {
-            System.out.println("Send successfully");
+            System.out.println("Send successfully =========");
         } else
-            System.out.println("Send fail");
+            System.out.println("Send fail ===========");
     }
 
     private byte[] toByteArray(InputStream in) throws IOException {

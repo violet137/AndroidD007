@@ -1,22 +1,13 @@
 package com.com.greenacademy.englishlearning.Model;
 
 public class QuestionDone {
-    int milisecord;
+
     int numberOfQuestion;
     String pathFile;
 
-    public QuestionDone(int milisecord, int numberOfQuestion, String pathFile) {
-        this.milisecord = milisecord;
+    public QuestionDone(int numberOfQuestion, String pathFile) {
         this.numberOfQuestion = numberOfQuestion;
         this.pathFile = pathFile;
-    }
-
-    public int getMilisecord() {
-        return milisecord;
-    }
-
-    public void setMilisecord(int milisencord) {
-        this.milisecord = milisencord;
     }
 
     public int getNumberOfQuestion() {

@@ -25,22 +25,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.com.greenacademy.englishlearning.Adapter.RecordingAdapter;
+import com.com.greenacademy.englishlearning.AsyncTask.CheckFileAsyncTask;
 import com.com.greenacademy.englishlearning.AsyncTask.GetLessonAsyncTask;
-import com.com.greenacademy.englishlearning.AsyncTask.SendRecordingAsyncTask;
 import com.com.greenacademy.englishlearning.Interface.GetterAudio;
-import com.com.greenacademy.englishlearning.Interface.HiddenRecord;
 import com.com.greenacademy.englishlearning.Model.AudioLesson;
 import com.com.greenacademy.englishlearning.Model.QuestionDone;
-import com.com.greenacademy.englishlearning.Model.Recording;
 import com.greenacademy.englishlearning.R;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
-public class ListenSkillFragment extends Fragment implements HiddenRecord, GetterAudio {
+public class ListenSkillFragment extends Fragment implements GetterAudio {
     final int PLAY = 1;
     final int STOP = -1;
     final int PAUSE = 0;
@@ -61,12 +57,10 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
     List<String> vietsub;
     List<Integer> block;
 
-
     List<Integer> recordingTime;
 
     int numberOfQuestion = -1;
-    int milisecordOfQuestion = 0;
-    int currenPossition = 0;
+    int currentPosition = 0;
 
     String pathSave;
 
@@ -75,17 +69,25 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
 
     int idLesson;
 
+    public RecordingAdapter getRecordingAdapter() {
+        return recordingAdapter;
+    }
+
     public void setIdLesson(int idLesson) {
         this.idLesson = idLesson;
     }
 
-    public List convertToList(int[] strings) {
-        List list = new ArrayList();
-        for (int i = 0; i < strings.length; i++) {
-            list.add(strings[i]);
-        }
-        return list;
+    public int getIdLesson() {
+        return idLesson;
     }
+
+//    public List convertToList(int[] strings) {
+//        List list = new ArrayList();
+//        for (int i = 0; i < strings.length; i++) {
+//            list.add(strings[i]);
+//        }
+//        return list;
+//    }
 
     public boolean checkPermission() {
         int write_ex = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -129,27 +131,19 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
         imgRecord.setVisibility(View.INVISIBLE);
         recyclerView = view.findViewById(R.id.recycleView);
 //
-//        GetLessonAsyncTask getLessonAsyncTask = new GetLessonAsyncTask();
-//        getLessonAsyncTask.setGetterAudio(this);
-//        getLessonAsyncTask.execute(idLesson);
-
-        SendRecordingAsyncTask sendRecordingAsyncTask = new SendRecordingAsyncTask();
-        sendRecordingAsyncTask.setListenSkillFragment(this);
-        sendRecordingAsyncTask.setIdLesson(idLesson);
-        sendRecordingAsyncTask.execute(new Recording(0, Environment.getExternalStorageDirectory().getAbsolutePath() + "/Lesson_1" + "_Question_0" + "_audio_record.3gp"));
+        GetLessonAsyncTask getLessonAsyncTask = new GetLessonAsyncTask();
+        getLessonAsyncTask.setGetterAudio(this);
+        getLessonAsyncTask.execute(idLesson);
 
 //        try {
-//            mediaPlayerOfRecord = new MediaPlayer();
-//            String haha = "/storage/emulated/0/Lesson_1_Question_0_audio_record.3gp";
-//            String hihi = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Lesson_1" + "_Question_0" + "_audio_record.3gp";
-//            mediaPlayerOfRecord.setDataSource(hihi);
-//            mediaPlayerOfRecord.prepare();
-//            mediaPlayerOfRecord.start();
-//            Toast.makeText(getContext(), haha, Toast.LENGTH_LONG).show();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
+//            MediaPlayer hieu = new MediaPlayer();
+//            hieu.setDataSource("/storage/emulated/0/Lesson_1_Question_1_audio_record.3gp");
+//            hieu.prepare();
+//            hieu.start();
+//        }catch (Exception e) {
+//            e.getMessage();
 //        }
+
 
 //                /storage/emulated/0/Lesson_1_Question_0_audio_record.3gp
 //        /storage/sdcard1/Lesson_1_Question_0_audio_record.3gp
@@ -173,7 +167,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
         int duration = mediaPlayer.getDuration();
 
         seekBar.setMax(duration);
-        mediaPlayer.seekTo(currenPossition);
+        mediaPlayer.seekTo(this.currentPosition);
 
         mediaPlayer.start();
     }
@@ -229,8 +223,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
                                 imgPlay.setImageResource(R.drawable.play_button);
                                 seekBar.setEnabled(false);
                                 numberOfQuestion = indexOfRecording;
-                                milisecordOfQuestion = currentPosition;
-                                recordingAdapter.addQuestionDone(new QuestionDone(milisecordOfQuestion, numberOfQuestion, null));
+                                recordingAdapter.addQuestionDone(new QuestionDone(numberOfQuestion, pathSave));
                                 recordingAdapter.notifyDataSetChanged();
                             }
                         }
@@ -258,7 +251,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
         thread.start();
     }
 
-    @Override
+
     public void hideBtnRecord() {
         if (numberOfQuestion == -1) {
             getActivity().runOnUiThread(new Runnable() {
@@ -277,7 +270,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
         }
     }
 
-    @Override
+
     public void setUnableBtnRecord() {
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -294,7 +287,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
         });
     }
 
-    @Override
+
     public void setAbleBtnRecord() {
         if (numberOfQuestion > -1) {
             getActivity().runOnUiThread(new Runnable() {
@@ -309,7 +302,7 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
         }
     }
 
-    @Override
+
     public void chooseQuestion(final QuestionDone questionDone) {
         pathSave = questionDone.getPathFile();
     }
@@ -326,7 +319,15 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
         recordingText = audioLesson.getListRecordingText();
         recordingTime = audioLesson.getListRecordingTime();
 
+        recordingAdapter = new RecordingAdapter(); // khoi tao adapter truoc khi add list question done
+        recordingAdapter.setListOfText(recordingText);
+        recordingAdapter.setListenSkillFragment(this);
+
+        CheckFileAsyncTask checkFileAsyncTask = new CheckFileAsyncTask(this, idLesson, recordingText.size());
+        checkFileAsyncTask.execute();
+
         System.out.println("done ==============");
+        Toast.makeText(getContext(), "Prepare finished", Toast.LENGTH_LONG).show();
 
         this.mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -344,14 +345,13 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
                     recordingAdapter.setPositionChoosed(-1);
                     recordingAdapter.notifyDataSetChanged();
                     numberOfQuestion = -1;
-                    milisecordOfQuestion = 0;
                     isPlaying = PLAY;
                     mediaPlayer.start();
                     imgPlay.setImageResource(R.drawable.pause);
                     seekBar.setEnabled(true);
                 } else if (isPlaying == STOP) {
                     isPlaying = PLAY;
-                    playRecord(currenPossition);
+                    playRecord(currentPosition);
                     updateUI();
                     imgPlay.setImageResource(R.drawable.pause);
                     seekBar.setEnabled(true);
@@ -420,15 +420,6 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
             }
         });
 
-        recordingAdapter = new RecordingAdapter();
-        recordingAdapter.setListOfText(recordingText);
-        recordingAdapter.setHiddenRecord(this);
-//        recordingAdapter.setPositionChoosed(2);
-//        recordingAdapter.addQuestionDone(0);
-//        recordingAdapter.addQuestionDone(4);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(recordingAdapter);
-
 
         imgRecord.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -485,6 +476,15 @@ public class ListenSkillFragment extends Fragment implements HiddenRecord, Gette
                 Toast.makeText(getContext(), "Play Record...", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void prepareAdapter() {
+
+//        recordingAdapter.setPositionChoosed(2);
+//        recordingAdapter.addQuestionDone(0);
+//        recordingAdapter.addQuestionDone(4);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(recordingAdapter);
     }
 
 }
