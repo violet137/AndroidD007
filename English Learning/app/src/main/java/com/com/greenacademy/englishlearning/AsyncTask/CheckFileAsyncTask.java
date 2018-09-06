@@ -2,10 +2,8 @@ package com.com.greenacademy.englishlearning.AsyncTask;
 
 import android.os.AsyncTask;
 import android.os.Environment;
-
 import com.com.greenacademy.englishlearning.Fragment.ListenSkillFragment;
 import com.com.greenacademy.englishlearning.Model.QuestionDone;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

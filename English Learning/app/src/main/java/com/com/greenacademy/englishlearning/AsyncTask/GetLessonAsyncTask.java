@@ -111,9 +111,7 @@ public class GetLessonAsyncTask extends AsyncTask<Integer, Void, AudioLesson> {
 
                             }
 
-                            AudioLesson audioLesson = new AudioLesson(listText, listTextTrans, listTime, listRecordingText, listRecordingTime, listRecording, audioUrl);
-
-                            return audioLesson;
+                            return new AudioLesson(listText, listTextTrans, listTime, listRecordingText, listRecordingTime, listRecording, audioUrl);
                         }
 
                     }
