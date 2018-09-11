@@ -127,6 +127,8 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
 
         if (position == listOfText.size() - 1) {
             holder.imgPhu.setVisibility(View.GONE);
+        } else {
+            holder.imgPhu.setVisibility(View.VISIBLE);
         }
 
         if (position == positionChoosed && !checkNullRecord(position)) {

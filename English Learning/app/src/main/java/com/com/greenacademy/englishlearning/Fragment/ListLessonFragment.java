@@ -78,7 +78,7 @@ public class ListLessonFragment extends Fragment implements GetterData {
         tvWaiting.setVisibility(View.GONE);
         imgWaiting.setVisibility(View.GONE);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         SnapHelper snapHelper = new PagerSnapHelper(); // dung nhu ViewPager. Dang cap
         snapHelper.attachToRecyclerView(recyclerView);

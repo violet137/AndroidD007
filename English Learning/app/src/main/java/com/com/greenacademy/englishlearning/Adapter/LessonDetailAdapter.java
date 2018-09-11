@@ -45,27 +45,13 @@ public class LessonDetailAdapter extends RecyclerView.Adapter<LessonHolder> {
     @Override
     public void onBindViewHolder(@NonNull final LessonHolder holder, final int position) {
 //        if (position == listLesson.size() - 1) {
-        if (position == 10 - 1) {
-            holder.slideHelperNext.setVisibility(View.INVISIBLE);
-        }
 
-        if (position != 0) {
-            holder.slideHelperBack.setVisibility(View.VISIBLE);
-        }
 
         holder.tvTitle.setText(listLesson.get(position).getTitle());
         holder.tvDesc.setText(listLesson.get(position).getDesc());
-        holder.tvTitleVs.setText(listLesson.get(position).getTitleSub());
-        holder.tvDescVs.setText(listLesson.get(position).getDescSub());
 
         holder.background.setImageBitmap(listBackground.get(position));
 
-        holder.btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listLessonFragment.startLesson(position);
-            }
-        });
 
 
     }
