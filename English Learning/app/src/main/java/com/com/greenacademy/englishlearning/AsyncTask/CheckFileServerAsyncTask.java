@@ -69,6 +69,6 @@ public class CheckFileServerAsyncTask extends AsyncTask<List<Recording>, Void, L
     protected void onPostExecute(List<QuestionDone> list) {
         super.onPostExecute(list);
 
-        
+
     }
 }
