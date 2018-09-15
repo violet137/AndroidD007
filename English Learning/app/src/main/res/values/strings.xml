@@ -24,63 +24,78 @@
         <item>hello ahihi</item>
     </string-array>
 
-    <string-array name="recording_text">
-        <item>Where do you live?</item>
-        <item>It is in California.</item>
-        <item>It is pretty big.</item>
-        <item>How big is Los Angeles?</item>
-    </string-array>
-
-    <integer-array name="recording_time">
-
-    </integer-array>
 
 
-    <string-array name="conversation">
-        <item>A: Where do you live?</item>
-        <item>B: I live in Pasadena.</item>
-        <item>A: Where is Pasadena?</item>
-        <item>B: It is in California.</item>
-        <item>A: Is it in northern California?</item>
-        <item>B: No. It is in southern California.</item>
-        <item>A: Is Pasadena a big city?</item>
-        <item>B: It is pretty big.</item>
-        <item>A: How big is "pretty big"?</item>
-        <item>B: It has about 140,000 people.</item>
-        <item>A: How big is Los Angeles?</item>
-        <item>B: It has about 3 million people</item>
-    </string-array>
 
-    <string-array name="vietsub">
-        <item>A: Bạn sống ở đâu?</item>
-        <item>B: Tôi sống ở Pasadena.</item>
-        <item>A: Pasadena thì ở đâu vậy?</item>
-        <item>B: Nó ở California đó.</item>
-        <item>A: Có phải ở phía bắc California không?</item>
-        <item>B: Không. Nó ở phía nam California.</item>
-        <item>A: Pasadena là một thành phố lớn phải không?</item>
-        <item>B: Nó khá lớn.</item>
-        <item>A: "Khá lớn" là lớn như thế nào?</item>
-        <item>B: Nó có khoảng 140,000 người.</item>
-        <item>A: Còn Los Angeles thì lớn như thê nào?</item>
-        <item>B: Nó có khoảng 3 triêu người.</item>
-    </string-array>
 
-    <integer-array name="block">
-        <item>0</item>
-        <item>3617</item>
-        <item>6560</item>
-        <item>9650</item>
-        <item>11389</item>
-        <item>15100</item>
-        <item>18926</item>
-        <item>22260</item>
-        <item>23702</item>
-        <item>27000</item>
-        <item>31109</item>
-        <item>35000</item>
-        <item>38674</item>
-    </integer-array>
+
+
+
+
+
+    <array name="nameOfImg">
+        <item>@drawable/img1</item>
+        <item>@drawable/img2</item>
+        <item>@drawable/img3</item>
+        <item>@drawable/img4</item>
+        <item>@drawable/img5</item>
+        <item>@drawable/img6</item>
+        <item>@drawable/img7</item>
+        <item>@drawable/img8</item>
+        <item>@drawable/img9</item>
+        <item>@drawable/img10</item>
+        <item>@drawable/img11</item>
+        <item>@drawable/img12</item>
+        <item>@drawable/img13</item>
+        <item>@drawable/img14</item>
+        <item>@drawable/img15</item>
+        <item>@drawable/img16</item>
+        <item>@drawable/img17</item>
+        <item>@drawable/img18</item>
+        <item>@drawable/img19</item>
+        <item>@drawable/img20</item>
+        <item>@drawable/img21</item>
+        <item>@drawable/img22</item>
+        <item>@drawable/img23</item>
+        <item>@drawable/img24</item>
+        <item>@drawable/img25</item>
+        <item>@drawable/img26</item>
+        <item>@drawable/img27</item>
+        <item>@drawable/img28</item>
+        <item>@drawable/img29</item>
+        <item>@drawable/img30</item>
+        <item>@drawable/img31</item>
+        <item>@drawable/img32</item>
+        <item>@drawable/img33</item>
+        <item>@drawable/img34</item>
+        <item>@drawable/img35</item>
+        <item>@drawable/img36</item>
+        <item>@drawable/img37</item>
+        <item>@drawable/img38</item>
+        <item>@drawable/img39</item>
+        <item>@drawable/img40</item>
+        <item>@drawable/img41</item>
+        <item>@drawable/img42</item>
+        <item>@drawable/img43</item>
+        <item>@drawable/img44</item>
+        <item>@drawable/img45</item>
+        <item>@drawable/img46</item>
+        <item>@drawable/img47</item>
+        <item>@drawable/img48</item>
+        <item>@drawable/img49</item>
+        <item>@drawable/img50</item>
+        <item>@drawable/img51</item>
+        <item>@drawable/img52</item>
+        <item>@drawable/img53</item>
+        <item>@drawable/img54</item>
+        <item>@drawable/img55</item>
+        <item>@drawable/img56</item>
+        <item>@drawable/img57</item>
+        <item>@drawable/img58</item>
+        <item>@drawable/img59</item>
+        <item>@drawable/img60</item>
+        <item>@drawable/img61</item>
+    </array>
 
     <array name="number">
         <item>@drawable/one</item>

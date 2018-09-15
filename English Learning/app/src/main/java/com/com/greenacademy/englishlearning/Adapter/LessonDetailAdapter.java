@@ -1,5 +1,7 @@
 package com.com.greenacademy.englishlearning.Adapter;
 
+import android.annotation.SuppressLint;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +20,7 @@ import java.util.List;
 public class LessonDetailAdapter extends RecyclerView.Adapter<LessonHolder> {
 
     List<Lesson> listLesson = new ArrayList<>();
-    List<Bitmap> listBackground = new ArrayList<>();
+    List<Integer> listBackground = new ArrayList<>();
 
     ListLessonFragment listLessonFragment;
 
@@ -30,14 +32,15 @@ public class LessonDetailAdapter extends RecyclerView.Adapter<LessonHolder> {
         this.listLesson = listLesson;
     }
 
-    public void setListBackground(List<Bitmap> listBackground) {
-        this.listBackground = listBackground;
-    }
-
     @NonNull
     @Override
     public LessonHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lesson_detail, parent, false);
+
+        @SuppressLint("Recycle") TypedArray list = view.getResources().obtainTypedArray(R.array.nameOfImg);
+        for (int i = 0; i < list.length(); i++) {
+            listBackground.add(list.getResourceId(i, -1));
+        }
 
         return new LessonHolder(view);
     }
@@ -50,7 +53,7 @@ public class LessonDetailAdapter extends RecyclerView.Adapter<LessonHolder> {
         holder.tvTitle.setText(listLesson.get(position).getTitle());
         holder.tvDesc.setText(listLesson.get(position).getDesc());
 
-        holder.background.setImageBitmap(listBackground.get(position));
+        holder.background.setImageResource(listBackground.get(position));
 
 
 
@@ -58,7 +61,7 @@ public class LessonDetailAdapter extends RecyclerView.Adapter<LessonHolder> {
 
     @Override
     public int getItemCount() {
-        return 10;
+        return listLesson.size();
     }
 
 
