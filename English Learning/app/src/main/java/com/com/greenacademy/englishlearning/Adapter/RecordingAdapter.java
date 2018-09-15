@@ -143,8 +143,9 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
                     listenSkillFragment.setUnableBtnRecord();
                     listenSkillFragment.chooseQuestion(listQuestionDone.get(position));
                 }
-            } else if (position != positionChoosed && listQuestionDone.get(position).getPathFile() == null) {
-                holder.imgChinh.setImageResource(listNumberIconChecked.get(position));
+            } else if (position != positionChoosed) {
+                if (listQuestionDone.get(position).getPathFile() == null)
+                    holder.imgChinh.setImageResource(listNumberIconChecked.get(position));
             }
 
             if (position == listQuestionDone.size() - 1) {

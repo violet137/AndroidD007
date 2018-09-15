@@ -11,5 +11,6 @@
     <color name="imgPhu">#00bf8a</color>
     <color name="imgPhu_2">#FFFF8800</color>
     <color name="backGroundColor">#f5f5f5</color>
-    <color name="green">#ff99cc00</color>
+    <color name="green">#4cae50</color>
+    <color name="greenTop">#225524</color>
 </resources>

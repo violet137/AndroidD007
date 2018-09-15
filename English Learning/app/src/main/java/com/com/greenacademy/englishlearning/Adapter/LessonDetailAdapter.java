@@ -55,6 +55,12 @@ public class LessonDetailAdapter extends RecyclerView.Adapter<LessonHolder> {
 
         holder.background.setImageResource(listBackground.get(position));
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listLessonFragment.startLesson(position);
+            }
+        });
 
 
     }
