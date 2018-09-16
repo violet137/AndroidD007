@@ -58,7 +58,7 @@ public class LessonDetailAdapter extends RecyclerView.Adapter<LessonHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listLessonFragment.startLesson(position);
+                listLessonFragment.startLesson(position, listLesson.get(position).getTitle(), listBackground.get(position));
             }
         });
 

@@ -18,6 +18,7 @@ public class LessonOfListenSkillActivity extends AppCompatActivity {
 
         ListenSkillFragment listenSkillFragment = new ListenSkillFragment();
         listenSkillFragment.setIdLesson(getIntent().getIntExtra("idLesson", -1));
+        listenSkillFragment.setResourceBg(getIntent().getIntExtra("resourceBg", -1));
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, listenSkillFragment).commit();

@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 import com.com.greenacademy.englishlearning.Adapter.RecordingAdapter;
 import com.com.greenacademy.englishlearning.AsyncTask.CheckFileAsyncTask;
 import com.com.greenacademy.englishlearning.AsyncTask.GetLessonAsyncTask;
+import com.com.greenacademy.englishlearning.AsyncTask.PrepareMediaPlayerAsyncTask;
 import com.com.greenacademy.englishlearning.Interface.GetterAudio;
 import com.com.greenacademy.englishlearning.Model.AudioLesson;
 import com.com.greenacademy.englishlearning.Model.QuestionDone;
@@ -46,9 +48,16 @@ public class ListenSkillFragment extends Fragment implements GetterAudio {
     MediaPlayer mediaPlayerOfRecord;
     TextView tvDuration, tvEnglishSaying, tvEnglishPrepare, tvVietnamese, tvNgheLai, tvNgheMau, tvRecordingText, tvSaying, tvRecord;
     SeekBar seekBar;
-    ImageView imgPlay, imgRecord, imgListen, imgListenSample;
+    ImageView imgPlay, imgRecord, imgListen, imgListenSample, imgLoading;
+    FrameLayout frameLayout;
+
     int isPlaying = STOP;
 
+    int resourceBg;
+
+    public void setResourceBg(int resourceBg) {
+        this.resourceBg = resourceBg;
+    }
 
     List<String> recordingText;
 
@@ -81,7 +90,19 @@ public class ListenSkillFragment extends Fragment implements GetterAudio {
         return idLesson;
     }
 
-//    public List convertToList(int[] strings) {
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
+
+    public FrameLayout getFrameLayout() {
+        return frameLayout;
+    }
+
+    public void setImgLoading(ImageView imgLoading) {
+        this.imgLoading = imgLoading;
+    }
+
+    //    public List convertToList(int[] strings) {
 //        List list = new ArrayList();
 //        for (int i = 0; i < strings.length; i++) {
 //            list.add(strings[i]);
@@ -125,29 +146,18 @@ public class ListenSkillFragment extends Fragment implements GetterAudio {
         tvSaying = view.findViewById(R.id.tvSaying);
         tvRecordingText = view.findViewById(R.id.tvRecordingText);
         tvRecord = view.findViewById(R.id.tvRecord);
+        frameLayout = view.findViewById(R.id.sceenLoading);
+        imgLoading = view.findViewById(R.id.bgLoading);
 
+        imgLoading.setImageResource(resourceBg);
 
         seekBar.setEnabled(false);
         imgRecord.setVisibility(View.INVISIBLE);
         recyclerView = view.findViewById(R.id.recycleView);
-//
+
         GetLessonAsyncTask getLessonAsyncTask = new GetLessonAsyncTask();
         getLessonAsyncTask.setGetterAudio(this);
         getLessonAsyncTask.execute(idLesson);
-
-//        try {
-//            MediaPlayer hieu = new MediaPlayer();
-//            hieu.setDataSource("/storage/emulated/0/Lesson_1_Question_1_audio_record.3gp");
-//            hieu.prepare();
-//            hieu.start();
-//        }catch (Exception e) {
-//            e.getMessage();
-//        }
-
-
-//                /storage/emulated/0/Lesson_1_Question_0_audio_record.3gp
-//        /storage/sdcard1/Lesson_1_Question_0_audio_record.3gp
-//                /storage/emulated/0/Lesson_1_Question_0_audio_record.3gp
 
         return view;
 
@@ -240,11 +250,6 @@ public class ListenSkillFragment extends Fragment implements GetterAudio {
                         });
                     }
 
-//                    try {
-//                        Thread.sleep(0);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
                 }
             }
         });
@@ -307,17 +312,27 @@ public class ListenSkillFragment extends Fragment implements GetterAudio {
         pathSave = questionDone.getPathFile();
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void getAudio(AudioLesson audioLesson) {
 
         this.audioLesson = audioLesson;
 
-        english = audioLesson.getListText();
-        vietsub = audioLesson.getListTextTrans();
-        block = audioLesson.getListTime();
-        recordingText = audioLesson.getListRecordingText();
-        recordingTime = audioLesson.getListRecordingTime();
+        this.mediaPlayer = new MediaPlayer();
+
+        PrepareMediaPlayerAsyncTask prepareMediaPlayerAsyncTask = new PrepareMediaPlayerAsyncTask();
+        prepareMediaPlayerAsyncTask.setListenSkillFragment(this);
+        prepareMediaPlayerAsyncTask.execute(audioLesson.getAudioUrl());
+
+
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    public void setFunctionForButton() {
+        english = this.audioLesson.getListText();
+        vietsub = this.audioLesson.getListTextTrans();
+        block = this.audioLesson.getListTime();
+        recordingText = this.audioLesson.getListRecordingText();
+        recordingTime = this.audioLesson.getListRecordingTime();
 
         recordingAdapter = new RecordingAdapter(); // khoi tao adapter truoc khi add list question done
         recordingAdapter.setListOfText(recordingText);
@@ -328,15 +343,6 @@ public class ListenSkillFragment extends Fragment implements GetterAudio {
 
         System.out.println("done ==============");
         Toast.makeText(getContext(), "Prepare finished", Toast.LENGTH_LONG).show();
-
-        this.mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        try {
-            mediaPlayer.setDataSource(audioLesson.getAudioUrl());
-            mediaPlayer.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -479,12 +485,10 @@ public class ListenSkillFragment extends Fragment implements GetterAudio {
     }
 
     public void prepareAdapter() {
-
-//        recordingAdapter.setPositionChoosed(2);
-//        recordingAdapter.addQuestionDone(0);
-//        recordingAdapter.addQuestionDone(4);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(recordingAdapter);
     }
+
+
 
 }
