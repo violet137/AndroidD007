@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.com.greenacademy.englishlearning.AsyncTask.LoginAsyncTask;
 import com.com.greenacademy.englishlearning.Interface.Supporter;
 import com.com.greenacademy.englishlearning.Model.FbUser;
-//import com.com.greenacademy.englishlearning.fragment.LoginGooglePlusFragment;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -37,11 +36,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.greenacademy.englishlearning.R;
 
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+
+//import com.com.greenacademy.englishlearning.fragment.LoginGooglePlusFragment;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, Supporter {
     LoginButton loginButton;
@@ -91,17 +90,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 // Application code
-                                try {
-                                    String email = object.getString("email");
-                                    fbUser.setEmail(email);
-                                    String name = object.getString("name");
-                                    fbUser.setName(name);
-                                    Profile profile = Profile.getCurrentProfile();
-                                    fbUser.setUrlAvarta(profile.getProfilePictureUri(100, 100).toString());
-                                    System.out.println(fbUser.toString());
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+//                                try {
+//                                    String email = object.getString("email");
+//                                    fbUser.setEmail(email);
+//                                    String name = object.getString("name");
+//                                    fbUser.setName(name);
+//                                    Profile profile = Profile.getCurrentProfile();
+//                                    fbUser.setUrlAvarta(profile.getProfilePictureUri(100, 100).toString());
+//                                    System.out.println(fbUser.toString());
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+                                Intent i2 = new Intent(getApplicationContext(), ListLessonActivity.class);
+                                startActivity(i2);
+                                finish();
 
                             }
                         });
