@@ -168,7 +168,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
-            Intent i2 = new Intent(this, MainActivity.class);
+            Intent i2 = new Intent(this, ListLessonActivity.class);
             startActivity(i2);
             this.finish();
         }
@@ -265,7 +265,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void connectServer(Boolean aBoolean) {
         if (aBoolean) {
-            Intent i2 = new Intent(this, MainActivity.class);
+            Intent i2 = new Intent(this, ListLessonActivity.class);
             startActivity(i2);
             this.finish();
         } else

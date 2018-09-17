@@ -18,7 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.com.greenacademy.englishlearning.Activity.ListenSkillActivity;
+import com.com.greenacademy.englishlearning.Activity.ListLessonActivity;
 import com.com.greenacademy.englishlearning.Adapter.TopicAdapter;
 import com.com.greenacademy.englishlearning.Interface.ItemClickTopic;
 import com.greenacademy.englishlearning.R;
@@ -94,7 +94,7 @@ public class MainBackgroundFragment extends Fragment implements ItemClickTopic {
 
         switch (position) {
             case 5:
-                Intent intent = new Intent(getActivity(), ListenSkillActivity.class);
+                Intent intent = new Intent(getActivity(), ListLessonActivity.class);
                 getActivity().startActivity(intent);
                 break;
         }
