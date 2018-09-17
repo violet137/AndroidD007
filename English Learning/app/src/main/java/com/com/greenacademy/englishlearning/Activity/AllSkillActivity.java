@@ -19,9 +19,13 @@ public class AllSkillActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_skill);
 
+
+
         idLesson = getIntent().getIntExtra("idLesson", -1);
         resourceBg = getIntent().getIntExtra("resourceBg", -1);
         title = getIntent().getStringExtra("title");
+
+        getSupportActionBar().setTitle(title);
 
 //        skillCon = this.findViewById(R.id.skillCon);
         skillListen = this.findViewById(R.id.skillLissen);

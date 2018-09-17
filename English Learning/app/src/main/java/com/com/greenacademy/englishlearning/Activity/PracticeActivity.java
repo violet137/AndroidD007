@@ -15,6 +15,8 @@ public class PracticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice);
 
+        getSupportActionBar().setTitle("Practice");
+
         ChattingFragment chattingFragment = new ChattingFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();

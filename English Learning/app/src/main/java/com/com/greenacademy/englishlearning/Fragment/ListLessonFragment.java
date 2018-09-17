@@ -80,6 +80,7 @@ public class ListLessonFragment extends Fragment implements GetterData {
         imgWaiting.setVisibility(View.GONE);
         frameLayout.setVisibility(View.VISIBLE);
 
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
 //        SnapHelper snapHelper = new PagerSnapHelper(); // dung nhu ViewPager. Dang cap

@@ -15,6 +15,8 @@ public class WriteSkillActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_skill);
 
+        getSupportActionBar().setTitle("Writing Skill");
+
         WritingSkillFragment writingSkillFragment = new WritingSkillFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -14,6 +14,8 @@ public class LessonOfListenSkillActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_of_listen_skill);
 
+        getSupportActionBar().setTitle("Listening Skill");
+
         ListenSkillFragment listenSkillFragment = new ListenSkillFragment();
         listenSkillFragment.setIdLesson(getIntent().getIntExtra("idLesson", -1));
         listenSkillFragment.setResourceBg(getIntent().getIntExtra("resourceBg", -1));

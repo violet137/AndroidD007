@@ -10,7 +10,7 @@
         android:id="@+id/imageWaiting"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/whats_your_future"
+        android:background="@drawable/bg_loading"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
