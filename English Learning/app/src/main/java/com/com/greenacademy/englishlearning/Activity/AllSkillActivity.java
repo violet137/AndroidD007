@@ -1,20 +1,18 @@
 package com.com.greenacademy.englishlearning.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.greenacademy.englishlearning.R;
 
 public class AllSkillActivity extends AppCompatActivity {
 
-    ImageView skillWrite, skillTalk, skillListen;
+    ImageView skillWrite, skillTalk, skillListen, skillCon;
     int idLesson, resourceBg;
     String title;
-    Button btnCon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +27,9 @@ public class AllSkillActivity extends AppCompatActivity {
         skillListen = this.findViewById(R.id.skillLissen);
         skillWrite = this.findViewById(R.id.skillWrite);
         skillTalk = this.findViewById(R.id.skillTalk);
-        btnCon = findViewById(R.id.skillCon);
+        skillCon = findViewById(R.id.skillCon);
 
-        btnCon.setOnClickListener(new View.OnClickListener() {
+        skillCon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("============== gogogo");
@@ -43,6 +41,16 @@ public class AllSkillActivity extends AppCompatActivity {
 
             }
         });
+
+        skillWrite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), WriteSkillActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
 //    @Override

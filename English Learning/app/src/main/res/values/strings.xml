@@ -21,7 +21,11 @@
         <item>@drawable/as_scb_audio</item>
     </string-array>
     <string-array name="arr_conversation_topic">
-        <item>hello ahihi</item>
+        <item>Do you love me ?</item>
+        <item>I love you</item>
+        <item>...</item>
+        <item>Im just kidding !!</item>
+        <item>Ok.fine :)</item>
     </string-array>
 
 

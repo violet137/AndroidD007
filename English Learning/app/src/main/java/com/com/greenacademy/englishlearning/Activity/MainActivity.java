@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.com.greenacademy.englishlearning.Fragment.ChattingFragment;
 import com.com.greenacademy.englishlearning.Fragment.MainBackgroundFragment;
 import com.greenacademy.englishlearning.R;
 
@@ -32,10 +31,10 @@ public class MainActivity extends AppCompatActivity implements MainBackgroundFra
         if (!isChoosedTopic) {
             Toast.makeText(getApplicationContext(), "Please choose Topic First !!", Toast.LENGTH_LONG).show();
         } else {
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.frame_chatting_bot, new ChattingFragment(position), "Second Chatting");
-            fragmentTransaction.addToBackStack("Second Chatting");
-            fragmentTransaction.commit();
+//            fragmentTransaction = fragmentManager.beginTransaction();
+//            fragmentTransaction.add(R.id.frame_chatting_bot, new ChattingFragment(position), "Second Chatting");
+//            fragmentTransaction.addToBackStack("Second Chatting");
+//            fragmentTransaction.commit();
         }
     }
 }

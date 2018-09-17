@@ -27,8 +27,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/as_scb_difficult"
-                />
+                app:srcCompat="@drawable/iconchat"
+                android:clickable="true"
+                android:focusable="true" />
 
             <ImageView
                 android:id="@+id/skillLissen"
@@ -44,14 +45,14 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <Button
+            <ImageView
                 android:id="@+id/skillCon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="run"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                app:srcCompat="@drawable/as_scb_immersion" />
 
             <ImageView
                 android:id="@+id/skillTalk"

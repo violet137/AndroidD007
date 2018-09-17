@@ -10,12 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.com.greenacademy.englishlearning.Activity.AllSkillActivity;
-import com.com.greenacademy.englishlearning.Activity.LessonOfListenSkillActivity;
+import com.com.greenacademy.englishlearning.Activity.PracticeActivity;
 import com.com.greenacademy.englishlearning.Adapter.LessonDetailAdapter;
 import com.com.greenacademy.englishlearning.AsyncTask.GetDataAsyncTask;
 import com.com.greenacademy.englishlearning.Interface.GetterData;
@@ -35,6 +36,7 @@ public class ListLessonFragment extends Fragment implements GetterData {
 
     TextView tvWaiting;
     ImageView imgWaiting;
+    FrameLayout frameLayout;
 
 
     @Nullable
@@ -50,6 +52,16 @@ public class ListLessonFragment extends Fragment implements GetterData {
         progressBar = view.findViewById(R.id.progressLoadInfo);
         tvWaiting = view.findViewById(R.id.tvWaiting);
         imgWaiting = view.findViewById(R.id.imageWaiting);
+        frameLayout = view.findViewById(R.id.frameLayout);
+
+
+        frameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PracticeActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         return view;
@@ -66,6 +78,7 @@ public class ListLessonFragment extends Fragment implements GetterData {
         progressBar.setVisibility(View.GONE);
         tvWaiting.setVisibility(View.GONE);
         imgWaiting.setVisibility(View.GONE);
+        frameLayout.setVisibility(View.VISIBLE);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
