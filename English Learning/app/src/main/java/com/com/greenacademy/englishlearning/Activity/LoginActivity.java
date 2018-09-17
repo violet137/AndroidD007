@@ -40,8 +40,6 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
-//import com.com.greenacademy.englishlearning.fragment.LoginGooglePlusFragment;
-
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, Supporter {
     LoginButton loginButton;
     private static final String EMAIL = "email";
@@ -59,6 +57,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.greenacademy.englishlearning.R.layout.activity_main);
+
+        /////////////////////////////////////////////
+        ////////////////////////////////////////////
+
 
         txtUserName = findViewById(R.id.txt_User);
         txtPassword = findViewById(R.id.txt_Password);
