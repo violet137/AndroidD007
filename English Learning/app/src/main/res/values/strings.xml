@@ -25,14 +25,6 @@
     </string-array>
 
 
-
-
-
-
-
-
-
-
     <array name="nameOfImg">
         <item>@drawable/img1</item>
         <item>@drawable/img2</item>

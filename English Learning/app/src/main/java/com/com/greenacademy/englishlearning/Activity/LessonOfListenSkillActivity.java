@@ -1,11 +1,9 @@
 package com.com.greenacademy.englishlearning.Activity;
 
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import com.com.greenacademy.englishlearning.Fragment.ListLessonFragment;
 import com.com.greenacademy.englishlearning.Fragment.ListenSkillFragment;
 import com.greenacademy.englishlearning.R;
 

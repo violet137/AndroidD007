@@ -12,13 +12,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="com.com.greenacademy.englishlearning.Activity.LoginActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+        android:theme="@style/AppTheme"
+        android:largeHeap="true">
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+        <activity android:name="com.com.greenacademy.englishlearning.Activity.LoginActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name="com.com.greenacademy.englishlearning.Activity.SignUpActivity" />
         <activity android:name="com.com.greenacademy.englishlearning.Activity.MainActivity" />
@@ -46,16 +50,15 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name="com.com.greenacademy.englishlearning.Activity.ListenSkillActivity" >
+        <activity android:name="com.com.greenacademy.englishlearning.Activity.ListenSkillActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.com.greenacademy.englishlearning.Activity.LessonOfListenSkillActivity">
-
-        </activity>
+        <activity android:name="com.com.greenacademy.englishlearning.Activity.LessonOfListenSkillActivity"></activity>
+        <activity android:name="com.com.greenacademy.englishlearning.Activity.AllSkillActivity"></activity>
     </application>
 
 </manifest>

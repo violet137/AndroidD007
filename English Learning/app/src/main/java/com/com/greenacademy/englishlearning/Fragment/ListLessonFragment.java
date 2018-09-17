@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.com.greenacademy.englishlearning.Activity.AllSkillActivity;
 import com.com.greenacademy.englishlearning.Activity.LessonOfListenSkillActivity;
 import com.com.greenacademy.englishlearning.Adapter.LessonDetailAdapter;
 import com.com.greenacademy.englishlearning.AsyncTask.GetDataAsyncTask;
@@ -79,7 +80,7 @@ public class ListLessonFragment extends Fragment implements GetterData {
     }
 
     public void startLesson(int position, String title, int resourceBg) {
-        Intent intent = new Intent(getActivity(), LessonOfListenSkillActivity.class);
+        Intent intent = new Intent(getActivity(), AllSkillActivity.class);
         intent.putExtra("idLesson", position + 1);
         intent.putExtra("title", title);
         intent.putExtra("resourceBg", resourceBg);
