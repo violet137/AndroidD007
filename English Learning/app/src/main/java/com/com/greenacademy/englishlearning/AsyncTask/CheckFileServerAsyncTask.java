@@ -3,7 +3,7 @@ package com.com.greenacademy.englishlearning.AsyncTask;
 import android.os.AsyncTask;
 import android.os.Environment;
 
-import com.com.greenacademy.englishlearning.Fragment.ListenSkillFragment;
+import com.com.greenacademy.englishlearning.Fragment.ConversionSkillFragment;
 import com.com.greenacademy.englishlearning.Model.QuestionDone;
 import com.com.greenacademy.englishlearning.Model.Recording;
 
@@ -20,11 +20,11 @@ import java.util.List;
 
 public class CheckFileServerAsyncTask extends AsyncTask<List<Recording>, Void, List<QuestionDone>> {
 
-    ListenSkillFragment listenSkillFragment;
+    ConversionSkillFragment conversionSkillFragment;
     int idLesson;
 
-    public CheckFileServerAsyncTask(ListenSkillFragment listenSkillFragment, int idLesson) {
-        this.listenSkillFragment = listenSkillFragment;
+    public CheckFileServerAsyncTask(ConversionSkillFragment conversionSkillFragment, int idLesson) {
+        this.conversionSkillFragment = conversionSkillFragment;
         this.idLesson = idLesson;
     }
 

@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.com.greenacademy.englishlearning.AsyncTask.SendRecordingAsyncTask;
-import com.com.greenacademy.englishlearning.Fragment.ListenSkillFragment;
+import com.com.greenacademy.englishlearning.Fragment.ConversionSkillFragment;
 import com.com.greenacademy.englishlearning.Holder.ItemViewRecordingHolder;
 import com.com.greenacademy.englishlearning.Model.QuestionDone;
 import com.com.greenacademy.englishlearning.Model.Recording;
@@ -24,7 +24,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
     private List<Integer> listNumberIcon = new ArrayList<>();
     private List<Integer> listNumberIconChecked = new ArrayList<>();
     private List<QuestionDone> listQuestionDone = new ArrayList<>();
-    private ListenSkillFragment listenSkillFragment;
+    private ConversionSkillFragment conversionSkillFragment;
 //    private List<QuestionDone> listQSDone = new ArrayList<>();
 
     public void setPositionChoosed(int positionChoosed) {
@@ -65,8 +65,8 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
         this.listOfText = listOfText;
     }
 
-    public void setListenSkillFragment(ListenSkillFragment listenSkillFragment) {
-        this.listenSkillFragment = listenSkillFragment;
+    public void setConversionSkillFragment(ConversionSkillFragment conversionSkillFragment) {
+        this.conversionSkillFragment = conversionSkillFragment;
     }
 
     private boolean checkQuestionDone(int position) {
@@ -84,8 +84,8 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
                 listQuestionDone.get(i).setPathFile(pathFile);
 
                 SendRecordingAsyncTask sendRecordingAsyncTask = new SendRecordingAsyncTask();
-                sendRecordingAsyncTask.setListenSkillFragment(listenSkillFragment);
-                sendRecordingAsyncTask.setIdLesson(listenSkillFragment.getIdLesson());
+                sendRecordingAsyncTask.setConversionSkillFragment(conversionSkillFragment);
+                sendRecordingAsyncTask.setIdLesson(conversionSkillFragment.getIdLesson());
                 sendRecordingAsyncTask.execute(new Recording(numberOfQuestion, pathFile));
 
                 break;
@@ -132,7 +132,7 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
         }
 
         if (position == positionChoosed && !checkNullRecord(position)) {
-            listenSkillFragment.setAbleBtnRecord();
+            conversionSkillFragment.setAbleBtnRecord();
             holder.imgChinh.setImageResource(R.drawable.music);
             holder.imgPhu.setImageResource(R.color.imgPhu_2);
         } else if (checkQuestionDone(position)) {
@@ -140,8 +140,8 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
                 System.out.println("pos: " + position + " : " + listQuestionDone.get(position).getPathFile());
                 holder.imgChinh.setImageResource(R.drawable.checking);
                 if (position == positionChoosed) {
-                    listenSkillFragment.setUnableBtnRecord();
-                    listenSkillFragment.chooseQuestion(listQuestionDone.get(position));
+                    conversionSkillFragment.setUnableBtnRecord();
+                    conversionSkillFragment.chooseQuestion(listQuestionDone.get(position));
                 }
             } else if (position != positionChoosed) {
                 if (listQuestionDone.get(position).getPathFile() == null)
@@ -149,10 +149,10 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
             }
 
             if (position == listQuestionDone.size() - 1) {
-                listenSkillFragment.hideBtnRecord(); // vi tri cuoi cung
+                conversionSkillFragment.hideBtnRecord(); // vi tri cuoi cung
             }
         } else {
-            listenSkillFragment.hideBtnRecord(); // an nut play record
+            conversionSkillFragment.hideBtnRecord(); // an nut play record
             holder.imgChinh.setImageResource(listNumberIcon.get(position));
         }
 

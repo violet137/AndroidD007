@@ -19,10 +19,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity android:name="com.com.greenacademy.englishlearning.Activity.SignUpActivity"
             android:screenOrientation="portrait"
@@ -62,9 +62,35 @@
             <!--</intent-filter>-->
         </activity>
         <activity
-            android:name="com.com.greenacademy.englishlearning.Activity.LessonOfListenSkillActivity"
+        android:name="com.com.greenacademy.englishlearning.Activity.ConversionSkillActivity"
+        android:screenOrientation="portrait"
+        android:parentActivityName="com.com.greenacademy.englishlearning.Activity.AllSkillActivity"/>
+
+        <activity
+            android:name="com.com.greenacademy.englishlearning.Activity.ListenSkillActivity"
             android:screenOrientation="portrait"
-            android:parentActivityName="com.com.greenacademy.englishlearning.Activity.AllSkillActivity"/>
+            android:parentActivityName="com.com.greenacademy.englishlearning.Activity.AllSkillActivity">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+
+        </activity>
+
+
+        <activity
+            android:name="com.com.greenacademy.englishlearning.Activity.VocabularySkillActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.com.greenacademy.englishlearning.Activity.AllSkillActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
         <activity
             android:name="com.com.greenacademy.englishlearning.Activity.AllSkillActivity"
             android:screenOrientation="portrait"

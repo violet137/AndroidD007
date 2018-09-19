@@ -38,7 +38,7 @@ public class AllSkillActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("============== gogogo");
-                Intent intent = new Intent(getApplicationContext(), LessonOfListenSkillActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ConversionSkillActivity.class);
                 intent.putExtra("idLesson", idLesson);
                 intent.putExtra("title", title);
                 intent.putExtra("resourceBg", resourceBg);

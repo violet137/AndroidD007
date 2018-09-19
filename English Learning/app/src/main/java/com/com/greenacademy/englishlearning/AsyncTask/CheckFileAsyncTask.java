@@ -2,7 +2,7 @@ package com.com.greenacademy.englishlearning.AsyncTask;
 
 import android.os.AsyncTask;
 import android.os.Environment;
-import com.com.greenacademy.englishlearning.Fragment.ListenSkillFragment;
+import com.com.greenacademy.englishlearning.Fragment.ConversionSkillFragment;
 import com.com.greenacademy.englishlearning.Model.QuestionDone;
 import java.io.File;
 import java.util.ArrayList;
@@ -10,12 +10,12 @@ import java.util.List;
 
 public class CheckFileAsyncTask extends AsyncTask<Void, Void, List<QuestionDone>> {
 
-    ListenSkillFragment listenSkillFragment;
+    ConversionSkillFragment conversionSkillFragment;
     int idLesson;
     int sizeOfListQuestion;
 
-    public CheckFileAsyncTask(ListenSkillFragment listenSkillFragment, int idLesson, int sizeOfListQuestion) {
-        this.listenSkillFragment = listenSkillFragment;
+    public CheckFileAsyncTask(ConversionSkillFragment conversionSkillFragment, int idLesson, int sizeOfListQuestion) {
+        this.conversionSkillFragment = conversionSkillFragment;
         this.idLesson = idLesson;
         this.sizeOfListQuestion = sizeOfListQuestion;
     }
@@ -39,7 +39,7 @@ public class CheckFileAsyncTask extends AsyncTask<Void, Void, List<QuestionDone>
     protected void onPostExecute(List<QuestionDone> list) {
         super.onPostExecute(list);
 
-        listenSkillFragment.getRecordingAdapter().addQuestionExist(list);
-        listenSkillFragment.prepareAdapter();
+        conversionSkillFragment.getRecordingAdapter().addQuestionExist(list);
+        conversionSkillFragment.prepareAdapter();
     }
 }

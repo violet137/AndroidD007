@@ -4,7 +4,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Base64;
 
-import com.com.greenacademy.englishlearning.Fragment.ListenSkillFragment;
+import com.com.greenacademy.englishlearning.Fragment.ConversionSkillFragment;
 import com.com.greenacademy.englishlearning.Model.Recording;
 
 import org.json.JSONObject;
@@ -23,15 +23,15 @@ import java.net.URL;
 
 public class SendRecordingAsyncTask extends AsyncTask<Recording, Void, Boolean> {
 
-    private ListenSkillFragment listenSkillFragment;
+    private ConversionSkillFragment conversionSkillFragment;
     private int idLesson;
 
     public void setIdLesson(int idLesson) {
         this.idLesson = idLesson;
     }
 
-    public void setListenSkillFragment(ListenSkillFragment listenSkillFragment) {
-        this.listenSkillFragment = listenSkillFragment;
+    public void setConversionSkillFragment(ConversionSkillFragment conversionSkillFragment) {
+        this.conversionSkillFragment = conversionSkillFragment;
     }
 
     @Override
@@ -124,7 +124,7 @@ public class SendRecordingAsyncTask extends AsyncTask<Recording, Void, Boolean> 
         String dataBase64 = null;
 
         try {
-            InputStream inputStream = listenSkillFragment.getContext().getContentResolver().openInputStream(Uri.fromFile(new File(outputFile)));
+            InputStream inputStream = conversionSkillFragment.getContext().getContentResolver().openInputStream(Uri.fromFile(new File(outputFile)));
             byte[] soundBytes;
             soundBytes = toByteArray(inputStream);
             dataBase64 = Base64.encodeToString(soundBytes, Base64.DEFAULT);
