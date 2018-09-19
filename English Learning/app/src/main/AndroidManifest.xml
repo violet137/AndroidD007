@@ -63,13 +63,16 @@
         </activity>
         <activity
             android:name="com.com.greenacademy.englishlearning.Activity.LessonOfListenSkillActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.com.greenacademy.englishlearning.Activity.AllSkillActivity"/>
         <activity
             android:name="com.com.greenacademy.englishlearning.Activity.AllSkillActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.com.greenacademy.englishlearning.Activity.ListLessonActivity"/>
         <activity
             android:name="com.com.greenacademy.englishlearning.Activity.WriteSkillActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.com.greenacademy.englishlearning.Activity.AllSkillActivity">
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -78,7 +81,9 @@
         </activity>
         <activity
             android:name="com.com.greenacademy.englishlearning.Activity.PracticeActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.ToolBar"
+            android:parentActivityName="com.com.greenacademy.englishlearning.Activity.ListLessonActivity"></activity>
     </application>
 
 </manifest>

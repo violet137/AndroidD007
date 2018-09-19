@@ -26,6 +26,7 @@ public class AllSkillActivity extends AppCompatActivity {
         title = getIntent().getStringExtra("title");
 
         getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 //        skillCon = this.findViewById(R.id.skillCon);
         skillListen = this.findViewById(R.id.skillLissen);

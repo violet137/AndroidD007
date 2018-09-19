@@ -16,6 +16,7 @@ public class WriteSkillActivity extends AppCompatActivity {
         setContentView(R.layout.activity_write_skill);
 
         getSupportActionBar().setTitle("Writing Skill");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         WritingSkillFragment writingSkillFragment = new WritingSkillFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
