@@ -36,7 +36,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/as_scb_audio" />
+                app:srcCompat="@drawable/as_scb_audio"
+                android:clickable="true"
+                android:focusable="true"/>
         </LinearLayout>
 
         <LinearLayout
@@ -59,7 +61,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/as_scb_pronunciation" />
+                app:srcCompat="@drawable/as_scb_learn"
+                android:clickable="true"
+                android:focusable="true"/>
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

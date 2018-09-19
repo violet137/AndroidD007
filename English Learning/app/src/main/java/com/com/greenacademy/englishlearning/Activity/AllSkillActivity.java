@@ -55,6 +55,22 @@ public class AllSkillActivity extends AppCompatActivity {
             }
         });
 
+        skillListen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ListenSkillActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        skillTalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), VocabularySkillActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
