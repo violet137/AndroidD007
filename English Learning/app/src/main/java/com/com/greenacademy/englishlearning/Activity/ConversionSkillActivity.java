@@ -14,7 +14,7 @@ public class ConversionSkillActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_of_listen_skill);
 
-        getSupportActionBar().setTitle("Conversion Skill");
+        getSupportActionBar().setTitle("Conversation Skill");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ConversionSkillFragment conversionSkillFragment = new ConversionSkillFragment();

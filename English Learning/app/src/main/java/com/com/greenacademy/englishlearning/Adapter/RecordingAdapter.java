@@ -116,6 +116,8 @@ public class RecordingAdapter extends RecyclerView.Adapter<ItemViewRecordingHold
             listNumberIconChecked.add(listChecked.getResourceId(i, -1));
         }
 
+        listOfText = conversionSkillFragment.getRecordingText();
+
         return new ItemViewRecordingHolder(view);
     }
 

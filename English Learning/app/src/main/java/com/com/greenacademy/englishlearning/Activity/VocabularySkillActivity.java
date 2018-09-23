@@ -19,6 +19,8 @@ public class VocabularySkillActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         VocabularySkillFragment vocabularySkillFragment = new VocabularySkillFragment();
+        vocabularySkillFragment.setIdLesson(getIntent().getIntExtra("idLesson", -1));
+        vocabularySkillFragment.setResourceBg(getIntent().getIntExtra("resourceBg", -1));
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, vocabularySkillFragment).commit();

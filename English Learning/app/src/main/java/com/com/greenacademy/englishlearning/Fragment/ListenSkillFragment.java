@@ -42,8 +42,6 @@ public class ListenSkillFragment extends Fragment {
         imgLoading = view.findViewById(R.id.bgLoading);
 
 
-        videoView.setVideoURI(Uri.parse(("android.resource://" +
-                getActivity().getPackageName() + "/" + R.raw.test)));
 
         MediaController mediaController;
         // Tạo bộ điều khiển

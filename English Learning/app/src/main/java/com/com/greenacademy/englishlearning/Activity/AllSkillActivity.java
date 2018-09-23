@@ -51,6 +51,9 @@ public class AllSkillActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), WriteSkillActivity.class);
+                intent.putExtra("idLesson", idLesson);
+                intent.putExtra("title", title);
+                intent.putExtra("resourceBg", resourceBg);
                 startActivity(intent);
             }
         });
@@ -59,6 +62,9 @@ public class AllSkillActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ListenSkillActivity.class);
+                intent.putExtra("idLesson", idLesson);
+                intent.putExtra("title", title);
+                intent.putExtra("resourceBg", resourceBg);
                 startActivity(intent);
             }
         });
@@ -67,6 +73,9 @@ public class AllSkillActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), VocabularySkillActivity.class);
+                intent.putExtra("idLesson", idLesson);
+                intent.putExtra("title", title);
+                intent.putExtra("resourceBg", resourceBg);
                 startActivity(intent);
             }
         });

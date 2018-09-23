@@ -58,6 +58,10 @@ public class ConversionSkillFragment extends Fragment implements GetterAudio {
         this.resourceBg = resourceBg;
     }
 
+    public List<String> getRecordingText() {
+        return recordingText;
+    }
+
     List<String> recordingText;
 
     AudioLesson audioLesson;
@@ -100,6 +104,8 @@ public class ConversionSkillFragment extends Fragment implements GetterAudio {
     public void setImgLoading(ImageView imgLoading) {
         this.imgLoading = imgLoading;
     }
+
+
 
     //    public List convertToList(int[] strings) {
 //        List list = new ArrayList();
