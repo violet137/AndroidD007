@@ -2,8 +2,8 @@ package com.com.greenacademy.englishlearning.AsyncTask;
 
 import android.os.AsyncTask;
 
-import com.com.greenacademy.englishlearning.Fragment.VocabularySkillFragment;
-import com.com.greenacademy.englishlearning.Model.Vocabulary;
+import com.com.greenacademy.englishlearning.Fragment.ListenSkillFragment;
+import com.com.greenacademy.englishlearning.Model.ListenSkill;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,16 +16,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetListenSkillAsyncTask extends AsyncTask<Integer, Void, Vocabulary> {
+public class GetListenSkillAsyncTask extends AsyncTask<Integer, Void, ListenSkill> {
 
-    VocabularySkillFragment vocabularySkillFragment;
+   ListenSkillFragment listenSkillFragment;
 
-    public void setVocabularySkillFragment(VocabularySkillFragment vocabularySkillFragment) {
-        this.vocabularySkillFragment = vocabularySkillFragment;
+    public void setListenSkillFragment(ListenSkillFragment listenSkillFragment) {
+        this.listenSkillFragment = listenSkillFragment;
     }
 
     @Override
-    protected Vocabulary doInBackground(Integer... integers) {
+    protected ListenSkill doInBackground(Integer... integers) {
         try {
             int idLesson = integers[0];
             String urlServer = "http://tamod.vn:8081/api/LessionDetail/ListeningById?idLession=" + idLesson;
@@ -65,29 +65,23 @@ public class GetListenSkillAsyncTask extends AsyncTask<Integer, Void, Vocabulary
                     JSONObject responseServer = new JSONObject(responseJson);
                     int status = responseServer.getInt("Status");
                     if (status == 1) {
-                        JSONObject vocaBig = responseServer.getJSONObject("VocabularyTranfer");
-                        JSONArray vocabularyTranfers = vocaBig.getJSONArray("VocabularyTranfers");
-                        if (vocabularyTranfers.length() > 0) {
+                        JSONArray sentenceDatas = responseServer.getJSONArray("SentenceDatas");
+                        if (sentenceDatas.length() > 0) {
                             List<String> listText = new ArrayList<>();
-                            List<String> listMeaning = new ArrayList<>();
                             List<Integer> listTime = new ArrayList<>();
 
-                            for (int i = 0; i < vocabularyTranfers.length(); i++) {
-                                JSONObject sentenData = vocabularyTranfers.getJSONObject(i);
-                                String text = sentenData.getString("Text");
-                                String textTrans = sentenData.getString("TextTrans");
-                                String meaningTrans = sentenData.getString("MeaningTrans");
-                                int time = sentenData.getInt("Time");
 
+                            for (int i = 0; i < sentenceDatas.length(); i++) {
+                                JSONObject sentenData = sentenceDatas.getJSONObject(i);
+                                String text = sentenData.getString("TextTrans");
+                                int time = sentenData.getInt("VTime");
 
-
-                                listText.add(text + " - " + textTrans);
-                                listMeaning.add(meaningTrans);
+                                listText.add(text);
                                 listTime.add(time);
                             }
                             String urlVideo = responseServer.getString("VideoUrl");
 
-                            return new Vocabulary(urlVideo, listText, listMeaning, listTime);
+                            return new ListenSkill(urlVideo, listText, listTime);
                         }
 
                     }
@@ -101,10 +95,10 @@ public class GetListenSkillAsyncTask extends AsyncTask<Integer, Void, Vocabulary
     }
 
     @Override
-    protected void onPostExecute(Vocabulary vocabulary) {
-        super.onPostExecute(vocabulary);
-        if (vocabulary != null) {
-          vocabularySkillFragment.playVideo(vocabulary);
+    protected void onPostExecute(ListenSkill listenSkill) {
+        super.onPostExecute(listenSkill);
+        if (listenSkill != null) {
+          listenSkillFragment.playVideo(listenSkill);
         }
     }
 }

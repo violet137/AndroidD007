@@ -2,7 +2,6 @@ package com.com.greenacademy.englishlearning.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -58,7 +57,7 @@ public class LessonDetailAdapter extends RecyclerView.Adapter<LessonHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listLessonFragment.startLesson(position, listLesson.get(position).getTitle(), listBackground.get(position));
+                listLessonFragment.startLesson(position, listLesson.get(position).getTitle(), listLesson.get(position).getDesc(), listBackground.get(position));
             }
         });
 

@@ -93,11 +93,12 @@ public class ListLessonFragment extends Fragment implements GetterData {
         recyclerView.setAdapter(lessonDetailAdapter);
     }
 
-    public void startLesson(int position, String title, int resourceBg) {
+    public void startLesson(int position, String title, String desc, int resourceBg) {
         Intent intent = new Intent(getActivity(), AllSkillActivity.class);
         intent.putExtra("idLesson", position + 1);
         intent.putExtra("title", title);
         intent.putExtra("resourceBg", resourceBg);
+        intent.putExtra("desc", desc);
         startActivity(intent);
     }
 }

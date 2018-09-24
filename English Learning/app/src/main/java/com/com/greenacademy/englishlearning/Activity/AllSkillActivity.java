@@ -12,7 +12,7 @@ public class AllSkillActivity extends AppCompatActivity {
 
     ImageView skillWrite, skillTalk, skillListen, skillCon;
     int idLesson, resourceBg;
-    String title;
+    String title, desc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class AllSkillActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_skill);
 
 
-
+        desc = getIntent().getStringExtra("desc");
         idLesson = getIntent().getIntExtra("idLesson", -1);
         resourceBg = getIntent().getIntExtra("resourceBg", -1);
         title = getIntent().getStringExtra("title");
@@ -37,8 +37,7 @@ public class AllSkillActivity extends AppCompatActivity {
         skillCon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("============== gogogo");
-                Intent intent = new Intent(getApplicationContext(), ConversionSkillActivity.class);
+                               Intent intent = new Intent(getApplicationContext(), ConversionSkillActivity.class);
                 intent.putExtra("idLesson", idLesson);
                 intent.putExtra("title", title);
                 intent.putExtra("resourceBg", resourceBg);
@@ -65,6 +64,7 @@ public class AllSkillActivity extends AppCompatActivity {
                 intent.putExtra("idLesson", idLesson);
                 intent.putExtra("title", title);
                 intent.putExtra("resourceBg", resourceBg);
+                intent.putExtra("desc", desc);
                 startActivity(intent);
             }
         });
@@ -83,22 +83,4 @@ public class AllSkillActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public void onClick(View v) {
-//
-//
-//        switch (v.getId()) {
-//            case R.id.skillWrite:
-//                break;
-//            case R.id.skillTalk:
-//                break;
-//            case R.id.skillCon:
-//
-//                break;
-//            case R.id.skillLissen:
-//                break;
-//        }
-
-
-//    }
 }

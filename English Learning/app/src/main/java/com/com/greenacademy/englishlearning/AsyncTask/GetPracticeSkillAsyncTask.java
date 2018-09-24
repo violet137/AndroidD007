@@ -73,15 +73,8 @@ public class GetPracticeSkillAsyncTask extends AsyncTask<Void, Void, List<String
                             for (int i = 0; i < sentenceDatas.length(); i++) {
                                 JSONObject sentenData = sentenceDatas.getJSONObject(i);
                                 String text = sentenData.getString("Text");
-
-
                                 listText.add(text);
-
                             }
-
-
-
-
                             return listText;
                         }
 

@@ -72,7 +72,7 @@ public class GetDataAsyncTask extends AsyncTask<Integer, Void, List<Lesson>> {
                                 JSONObject lessonJson = lessonTranfers.getJSONObject(i);
                                 Lesson lesson = new Lesson();
                                 lesson.setTitle(lessonJson.getString("Ten"));
-                                lesson.setDesc(lessonJson.getString("MoTa"));
+                                lesson.setDesc(lessonJson.getString("MoTaTrans"));
 
                                 list.add(lesson);
                             }
