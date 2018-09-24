@@ -18,10 +18,10 @@ import java.util.List;
 
 public class LessonDetailAdapter extends RecyclerView.Adapter<LessonHolder> {
 
-    List<Lesson> listLesson = new ArrayList<>();
-    List<Integer> listBackground = new ArrayList<>();
+    private List<Lesson> listLesson = new ArrayList<>();
+    private List<Integer> listBackground = new ArrayList<>();
 
-    ListLessonFragment listLessonFragment;
+    private ListLessonFragment listLessonFragment;
 
     public void setListLessonFragment(ListLessonFragment listLessonFragment) {
         this.listLessonFragment = listLessonFragment;
@@ -46,8 +46,6 @@ public class LessonDetailAdapter extends RecyclerView.Adapter<LessonHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final LessonHolder holder, final int position) {
-//        if (position == listLesson.size() - 1) {
-
 
         holder.tvTitle.setText(listLesson.get(position).getTitle());
         holder.tvDesc.setText(listLesson.get(position).getDesc());
