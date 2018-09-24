@@ -105,16 +105,6 @@ public class ConversionSkillFragment extends Fragment implements GetterAudio {
         this.imgLoading = imgLoading;
     }
 
-
-
-    //    public List convertToList(int[] strings) {
-//        List list = new ArrayList();
-//        for (int i = 0; i < strings.length; i++) {
-//            list.add(strings[i]);
-//        }
-//        return list;
-//    }
-
     public boolean checkPermission() {
         int write_ex = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int record_audio = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.RECORD_AUDIO);
@@ -465,7 +455,7 @@ public class ConversionSkillFragment extends Fragment implements GetterAudio {
                             recordingAdapter.addPathFile(numberOfQuestion, pathSave);
                             recordingAdapter.notifyDataSetChanged();
                         }
-                        Toast.makeText(getContext(), pathSave, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), pathSave, Toast.LENGTH_SHORT).show();
                         System.out.println(pathSave);
                         break;
                 }

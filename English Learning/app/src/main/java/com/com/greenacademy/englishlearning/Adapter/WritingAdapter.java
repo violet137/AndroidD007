@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.com.greenacademy.englishlearning.Fragment.WritingSkillFragment;
 import com.com.greenacademy.englishlearning.Holder.ItemViewRecordingHolder;
 import com.greenacademy.englishlearning.R;
 
@@ -19,17 +20,17 @@ public class WritingAdapter extends RecyclerView.Adapter<ItemViewRecordingHolder
     private List<Integer> listNumberIcon = new ArrayList<>();
     private List<Integer> listNumberIconChecked = new ArrayList<>();
     int numberOfWord;
+    WritingSkillFragment writingSkillFragment;
 
-    int indexOfWord = -1;
-
+    public void setWritingSkillFragment(WritingSkillFragment writingSkillFragment) {
+        this.writingSkillFragment = writingSkillFragment;
+    }
 
     public WritingAdapter(int numberOfWord) {
         this.numberOfWord = numberOfWord;
     }
 
-    public void setIndexOfWord(int indexOfWord) {
-        this.indexOfWord = indexOfWord;
-    }
+
 
     @NonNull
     @Override
@@ -58,14 +59,18 @@ public class WritingAdapter extends RecyclerView.Adapter<ItemViewRecordingHolder
             holder.imgPhu.setVisibility(View.VISIBLE);
         }
 
+
+
+        holder.imgChinh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.imgChinh.setImageResource(listNumberIconChecked.get(position));
+                holder.imgPhu.setImageResource(R.color.imgPhu_2);
+                writingSkillFragment.loadAudio(position);
+            }
+        });
         holder.imgChinh.setImageResource(listNumberIcon.get(position));
 
-       holder.imgChinh.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               holder.imgChinh.setImageResource(listNumberIconChecked.get(position));
-           }
-       });
 
 
     }

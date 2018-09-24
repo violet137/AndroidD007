@@ -2,6 +2,7 @@ package com.com.greenacademy.englishlearning.Fragment;
 
 
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -18,9 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.com.greenacademy.englishlearning.Adapter.WritingAdapter;
+import com.com.greenacademy.englishlearning.AsyncTask.GetWritingSkillAsyncTask;
 import com.com.greenacademy.englishlearning.Model.WritingQuestion;
 import com.greenacademy.englishlearning.R;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -29,11 +32,24 @@ public class WritingSkillFragment extends Fragment implements View.OnClickListen
     Button btnDone;
     ConstraintLayout layoutShowResult, layoutShowHint;
     EditText edtInput;
-    TextView tvHint, tvShowResult;
+    TextView tvHint, tvShowResult, tvQs;
     String strHint;
     MediaPlayer sound;
     RecyclerView recycleView;
     WritingAdapter writingAdapter;
+
+    List<WritingQuestion> list;
+
+    int idLesson;
+    int resourceBg;
+
+    public void setIdLesson(int idLesson) {
+        this.idLesson = idLesson;
+    }
+
+    public void setResourceBg(int resourceBg) {
+        this.resourceBg = resourceBg;
+    }
 
     public WritingSkillFragment() {
     }
@@ -53,8 +69,13 @@ public class WritingSkillFragment extends Fragment implements View.OnClickListen
 
         tvShowResult = view.findViewById(R.id.tv_showresult);
         recycleView = view.findViewById(R.id.recycleView);
+        tvQs = view.findViewById(R.id.tvQs);
 
-        sound = MediaPlayer.create(getContext(), R.raw.dailylife001);
+
+
+        GetWritingSkillAsyncTask getWritingSkillAsyncTask = new GetWritingSkillAsyncTask();
+        getWritingSkillAsyncTask.setWritingSkillFragment(this);
+        getWritingSkillAsyncTask.execute(idLesson);
 
 
         return view;
@@ -64,7 +85,10 @@ public class WritingSkillFragment extends Fragment implements View.OnClickListen
         strHint = "...";
         tvHint.setText(strHint);
 
+        this.list = list;
+
         writingAdapter = new WritingAdapter(list.size());
+        writingAdapter.setWritingSkillFragment(this);
         recycleView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recycleView.setAdapter(writingAdapter);
 
@@ -72,6 +96,35 @@ public class WritingSkillFragment extends Fragment implements View.OnClickListen
         btnSpeak.setOnClickListener(this);
         btnDone.setOnClickListener(this);
     }
+
+    public void loadAudio(final int index) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tvQs.setText("Question : " + (index + 1));
+            }
+        });
+
+        try {
+            sound = new MediaPlayer();
+            sound.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            strHint = list.get(index).getText();
+            tvHint.setText(strHint);
+            sound.setDataSource(list.get(index).getAudioUrl());
+            sound.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        sound.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                sound.start();
+            }
+        });
+    }
+
+
 
     @Override
     public void onClick(View view) {

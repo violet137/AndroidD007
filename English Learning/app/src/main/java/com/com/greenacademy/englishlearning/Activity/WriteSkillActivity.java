@@ -19,6 +19,8 @@ public class WriteSkillActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         WritingSkillFragment writingSkillFragment = new WritingSkillFragment();
+        writingSkillFragment.setIdLesson(getIntent().getIntExtra("idLesson", -1));
+        writingSkillFragment.setResourceBg(getIntent().getIntExtra("resourceBg", -1));
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, writingSkillFragment).commit();
