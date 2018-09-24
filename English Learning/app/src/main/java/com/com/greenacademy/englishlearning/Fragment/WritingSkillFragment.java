@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.com.greenacademy.englishlearning.Adapter.WritingAdapter;
+import com.com.greenacademy.englishlearning.Model.WritingQuestion;
 import com.greenacademy.englishlearning.R;
+
+import java.util.List;
 
 
 public class WritingSkillFragment extends Fragment implements View.OnClickListener {
@@ -26,6 +32,8 @@ public class WritingSkillFragment extends Fragment implements View.OnClickListen
     TextView tvHint, tvShowResult;
     String strHint;
     MediaPlayer sound;
+    RecyclerView recycleView;
+    WritingAdapter writingAdapter;
 
     public WritingSkillFragment() {
     }
@@ -42,16 +50,27 @@ public class WritingSkillFragment extends Fragment implements View.OnClickListen
         layoutShowResult = view.findViewById(R.id.layout_showresult);
         edtInput = view.findViewById(R.id.edt_inputanswer);
         tvHint = view.findViewById(R.id.tv_hint);
-        strHint = "Ahihi";
-        tvHint.setText(strHint);
+
         tvShowResult = view.findViewById(R.id.tv_showresult);
+        recycleView = view.findViewById(R.id.recycleView);
 
         sound = MediaPlayer.create(getContext(), R.raw.dailylife001);
+
+
+        return view;
+    }
+
+    public void setUp(List<WritingQuestion> list) {
+        strHint = "...";
+        tvHint.setText(strHint);
+
+        writingAdapter = new WritingAdapter(list.size());
+        recycleView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recycleView.setAdapter(writingAdapter);
 
         btnHint.setOnClickListener(this);
         btnSpeak.setOnClickListener(this);
         btnDone.setOnClickListener(this);
-        return view;
     }
 
     @Override

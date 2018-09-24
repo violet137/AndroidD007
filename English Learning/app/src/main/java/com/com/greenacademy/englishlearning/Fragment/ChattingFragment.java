@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class ChattingFragment extends Fragment {
     FlowLayout layoutShowWord, layoutChooseWord;
@@ -72,16 +73,13 @@ public class ChattingFragment extends Fragment {
     public void setSource(List<String> source) {
         layoutShowWord.setOnDragListener(new MyDragListener());
         layoutChooseWord.setOnDragListener(new MyDragListener());
-//        getConversation content = new getConversation();
-//        content.getContent();
 
         arrUserMess = source;
-
 
         list = new ArrayList<>();
         index = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-        User bot = new User("Teacher TeLlo");
+        User bot = new User("Teacher ");
         UserMessage first = new UserMessage(arrUserMess.get(index), bot, sdf.format(new Date()));
         list.add(first);
 
@@ -169,7 +167,7 @@ public class ChattingFragment extends Fragment {
                             answer += ((Button) layoutChooseWord.getChildAt(i)).getText().toString() + " ";
                         }
                         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-                        User bot = new User("Teacher TeLlo");
+                        User bot = new User("Teacher");
                         if (answer.trim().equals(arrUserMess.get(index))) {
                             getMessageList();
                             UserMessage message = new UserMessage(arrUserMess.get(index), bot, sdf.format(new Date()));
@@ -206,9 +204,26 @@ public class ChattingFragment extends Fragment {
             index++;
         }
         String statement = arrUserMess.get(index);
-        String[] words = statement.split(" ");
+        String[] list = statement.split(" ");
+        List<String> tmp = new ArrayList<>();
+        List<String> words = new ArrayList<>();
+
+        for (int i = 0; i < list.length; i++) {
+            tmp.add(list[i]);
+        }
+
+        Random random = new Random();
+
+        int size = tmp.size();
+        for (int i = 0; i < size; i++) {
+            int index = random.nextInt(tmp.size());
+            words.add(tmp.get(index));
+            tmp.remove(index);
+        }
+
+
         layoutChooseWord.removeAllViews();
-        for (int i = 0; i < words.length; i++) {
+        for (int i = 0; i < words.size(); i++) {
             final Button btnWord = new Button(getContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -216,7 +231,7 @@ public class ChattingFragment extends Fragment {
             );
             params.setMargins(5, 5, 5, 5);
             btnWord.setLayoutParams(params);
-            btnWord.setText(words[i]);
+            btnWord.setText(words.get(i));
             btnWord.setTextSize(15);
             btnWord.setTransformationMethod(null);
             btnWord.setBackgroundColor(Color.parseColor("#27a0ee"));
