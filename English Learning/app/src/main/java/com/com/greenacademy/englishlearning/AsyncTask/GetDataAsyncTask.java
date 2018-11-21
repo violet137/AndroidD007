@@ -78,7 +78,6 @@ public class GetDataAsyncTask extends AsyncTask<Integer, Void, List<Lesson>> {
                             }
                             return list;
                         }
-
                     }
                 }
             }
